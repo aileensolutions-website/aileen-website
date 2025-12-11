@@ -1,0 +1,287 @@
+ 
+      .stage {
+        position: relative;
+        width: min(1100px, 92vw);
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(6, 130px);
+        grid-auto-rows: 130px;
+        gap: 0px;
+        position: relative;
+        z-index: 1;
+      }
+
+      :root {
+        --stroke: 3px;
+        --sep: 28px; /* คู่เส้นรอบ id6 สำหรับกรุ๊ป 0 */
+        --pause7: 0.12s; /* พักนิดเดียวที่จุด 7 ก่อนแตกกิ่ง (กรุ๊ป 1) */
+
+        /* g0 (9→6) – ค่าจริง JS จะคำนวณตามความยาว */
+        --d-ab: 0.45s;
+        --d-bc: 0.45s;
+        --d-v2: 0.45s;
+        --e-ab: 0.45s;
+        --e-bc: 0.45s;
+        --e-v2: 0.45s;
+
+        /* g1 – วาด/ลบ */
+        --d-g1h: 0.6s;
+        --d-up: 0.6s;
+        --d-dn1: 0.6s;
+        --d-dn2: 0.6s;
+        --off-up: 0s;
+        --off-dn1: 0s;
+        --off-dn2: 0s;
+        --e-g1h: 0.6s;
+        --e-up: 0.6s;
+        --e-dn1: 0.6s;
+        --e-dn2: 0.6s;
+        --offE-h: 0s;
+        --offE-up: 0s;
+        --offE-dn1: 0s;
+        --offE-dn2: 0s;
+
+        /* g2 – split: 2→3  &  12→13→(ลง)→15→16 */
+        --d-g2h1: 0.6s; /* 2→3 */
+        --d-g2h12: 0.6s; /* 12→13 */
+        --d-g2v: 0.6s; /* 13→15 (แนวตั้ง) */
+        --d-g2h2: 0.6s; /* 15→16 */
+
+        /* ลบทีละเส้น (จะถูก JS เซ็ต offset ให้ลบเป็นทอดๆ หลังวาดครบทั้งหมด) */
+        --e-g2h2: 0.6s;
+        --e-g2v: 0.6s;
+        --e-g2h12: 0.6s;
+        --e-g2h1: 0.6s;
+        --offG2-h2: 0s;
+        --offG2-v: 0s;
+        --offG2-h12: 0s;
+        --offG2-h1: 0s;
+      }
+
+      .lines {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 2;
+      }
+      .lines .seg {
+        fill: none;
+        stroke-width: var(--stroke);
+        stroke-linecap: butt;
+        stroke-linejoin: miter;
+        stroke-miterlimit: 2;
+        stroke-dasharray: 1;
+        stroke-dashoffset: 1;
+        animation: none;
+        animation-fill-mode: forwards;
+        vector-effect: non-scaling-stroke;
+        shape-rendering: geometricPrecision;
+      }
+
+      /* g0: 9→6 (AB แล้ว BC+V2 พร้อมกัน, ลบ BC+V2 พร้อมกัน แล้วค่อยลบ AB) */
+      .lines.run[data-mode="g0"] .seg.ab {
+        animation: drawF var(--d-ab) linear forwards 0s,
+          eraseFromStart var(--e-ab) linear forwards
+            calc(var(--d-ab) + var(--d-bc) + var(--d-v2));
+      }
+      .lines.run[data-mode="g0"] .seg.bc {
+        animation: drawF var(--d-bc) linear forwards var(--d-ab),
+          eraseFromStart var(--e-bc) linear forwards
+            calc(var(--d-ab) + var(--d-bc) + var(--d-v2) + var(--e-ab));
+      }
+      .lines.run[data-mode="g0"] .seg.v2 {
+        animation: drawF var(--d-v2) linear forwards var(--d-ab),
+          eraseFromStart var(--e-v2) linear forwards
+            calc(var(--d-ab) + var(--d-bc) + var(--d-v2) + var(--e-ab));
+      }
+
+      /* g1: 6→7, พัก, แตกแขนบน/ล่างพร้อมกัน, ลบทีละเส้น */
+      .lines.run[data-mode="g1"] .seg.g1h {
+        animation: drawF var(--d-g1h) linear forwards 0s,
+          eraseFromStart var(--e-g1h) linear forwards var(--offE-h);
+      }
+      .lines.run[data-mode="g1"] .seg.up {
+        animation: drawF var(--d-up) linear forwards var(--off-up),
+          eraseFromStart var(--e-up) linear forwards var(--offE-up);
+      }
+      .lines.run[data-mode="g1"] .seg.dn1 {
+        animation: drawF var(--d-dn1) linear forwards var(--off-dn1),
+          eraseFromStart var(--e-dn1) linear forwards var(--offE-dn1);
+      }
+      .lines.run[data-mode="g1"] .seg.dn2 {
+        animation: drawF var(--d-dn2) linear forwards var(--off-dn2),
+          eraseFromStart var(--e-dn2) linear forwards var(--offE-dn2);
+      }
+
+      /* g2 (split): 2→3 (พร้อมกันกับ) 12→13 → 13↓15 → 15→16
+     - วาด: h1 และ h12 เริ่มพร้อมกัน, แล้ว v, แล้ว h2
+     - ลบ: เริ่มพร้อมกันสองฝั่ง แต่ลบเป็นทอดๆ ต่อเนื่องในแต่ละฝั่ง:
+           ฝั่งซ้าย: h1
+           ฝั่งขวา: h12 → v → h2 */
+      .lines.run[data-mode="g2"] .seg.g2h1 {
+        animation: drawF var(--d-g2h1) linear forwards 0s,
+          eraseFromStart var(--e-g2h1) linear forwards var(--offG2-h1);
+      }
+      .lines.run[data-mode="g2"] .seg.g2h12 {
+        animation: drawF var(--d-g2h12) linear forwards 0s,
+          eraseFromStart var(--e-g2h12) linear forwards var(--offG2-h12);
+      }
+      .lines.run[data-mode="g2"] .seg.g2v {
+        animation: drawF var(--d-g2v) linear forwards var(--d-g2h12),
+          eraseFromStart var(--e-g2v) linear forwards var(--offG2-v);
+      }
+      .lines.run[data-mode="g2"] .seg.g2h2 {
+        animation: drawF var(--d-g2h2) linear forwards
+            calc(var(--d-g2h12) + var(--d-g2v)),
+          eraseFromStart var(--e-g2h2) linear forwards var(--offG2-h2);
+      }
+
+      @keyframes drawF {
+        from {
+          stroke-dashoffset: 1;
+        }
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+      @keyframes eraseFromStart {
+        from {
+          stroke-dashoffset: 0;
+        }
+        to {
+          stroke-dashoffset: -1;
+        }
+      }
+
+      /* tiles (เลย์เอาต์เดิม) */
+      .tile {
+        width: 95px;
+        height: 95px;
+      
+        border-radius: 10px;
+        background: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        cursor: pointer;
+        transition: background 0.35s, box-shadow 0.35s, border-color 0.35s,
+          transform 0.3s, opacity 0.35s;
+        opacity: 0.45;
+        animation: float 6.5s cubic-bezier(0.25, 0.1, 0.25, 1) infinite
+            alternate,
+          pulse 3.2s ease-in-out infinite;
+      }
+      .tile svg {
+        width: 32px;
+        height: 32px;
+        stroke: #aeb7c3;
+        fill: none;
+        stroke-width: 1.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        filter: blur(0.2px);
+        transition: stroke 0.3s, opacity 0.35s;
+        opacity: 0.8;
+      }
+      .tile.active {
+        background: #fff;
+        border-color: transparent;
+       box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; 
+        opacity: 1;
+        transform: scale(1.012);
+      }
+      .tile.inactive {
+        background: transparent;
+        border-color: rgba(215, 222, 230, 0.6);
+        box-shadow: none;
+        opacity: 0.35;
+        transform: scale(1);
+      }
+      .tile:hover {
+        transform: translateY(-4px);
+      }
+      .tile:nth-child(1) {
+        grid-column: 1;
+        grid-row: 1;
+      }
+      .tile:nth-child(2) {
+        grid-column: 4;
+        grid-row: 1;
+      }
+      .tile:nth-child(3) {
+        grid-column: 5;
+        grid-row: 1;
+      }
+      .tile:nth-child(4) {
+        grid-column: 1;
+        grid-row: 2;
+      }
+      .tile:nth-child(5) {
+        grid-column: 2;
+        grid-row: 2;
+      }
+      .tile:nth-child(6) {
+        grid-column: 3;
+        grid-row: 2;
+      }
+      .tile:nth-child(7) {
+        grid-column: 4;
+        grid-row: 2;
+      }
+      .tile:nth-child(8) {
+        grid-column: 6;
+        grid-row: 2;
+      }
+      .tile:nth-child(9) {
+        grid-column: 2;
+        grid-row: 3;
+      }
+      .tile:nth-child(10) {
+        grid-column: 4;
+        grid-row: 3;
+      }
+      .tile:nth-child(11) {
+        grid-column: 3;
+        grid-row: 4;
+      }
+      .tile:nth-child(12) {
+        grid-column: 4;
+        grid-row: 4;
+      }
+      .tile:nth-child(13) {
+        grid-column: 5;
+        grid-row: 4;
+      }
+      .tile:nth-child(14) {
+        grid-column: 2;
+        grid-row: 5;
+      }
+      .tile:nth-child(15) {
+        grid-column: 5;
+        grid-row: 5;
+      }
+      .tile:nth-child(16) {
+        grid-column: 6;
+        grid-row: 5;
+      }
+      @keyframes float {
+        0% {
+          transform: translateY(-6px) scale(0.985);
+        }
+        100% {
+          transform: translateY(6px) scale(1.015);
+        }
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          box-shadow: 0 0 0 0 rgba(215, 222, 230, 0);
+        }
+        50% {
+          box-shadow: 0 0 0 2px rgba(215, 222, 230, 0.16);
+        }
+      }
