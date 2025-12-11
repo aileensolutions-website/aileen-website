@@ -1,41 +1,4 @@
-/*
-Theme Name: Xriders 
-Author: Pixel-plus 
-Author URI: https://themeforest.net/user/Pixel-plus /portfolio
-Description: Cloudly - Sass And software Html Template
-Service Html Template 
-Version: 1.0.0
-*/
-/*CSS Table Of Content Ends Here*/
-/*
---------------------------------------------------------------
-[Table of Contents]
---------------------------------------------------------------
-01. Variables & Mixins
-02. Typography
-03. Buttons
-04. About 
-05. Animation 
-06. Brand 
-07. Contact
-08. Cta
-09. Faq
-10. Feature
-11. Footer
-12. Header
-13. Helping
-14. Hero
-15. Meanmenu
-16. News
-17. Preloader
-18. Pricing
-19. Project
-20. Section
-21. Service
-22. Team
-23. Testimonial
---------------------------------------------------------------
-*/
+
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 :root {
@@ -51,7 +14,7 @@ Version: 1.0.0
 }
 
 .pp-theme-btn {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   font-family: "DM Sans", sans-serif;
   background: linear-gradient(270deg, #4db6ac 0%, #00838f 100%);
@@ -2470,13 +2433,13 @@ span {
   padding: 10px 0;
 }
 .header-main .header-logo img {
-  width: 60px;
+  width: 50px;
 }
 .header-main .header-logo-2 img {
   width: 60px;
 }
 .header-main.style-1 {
-  padding: 10px 20px;
+  padding: 2px 20px;
   background: var(--pp-white);
   border-radius: 100px;
 }
@@ -2499,7 +2462,7 @@ span {
 }
 .header-main .main-menu ul li a {
   display: inline-block;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   color: var(--pp-header);
   font-family: "DM Sans", sans-serif;
@@ -3578,12 +3541,12 @@ span {
 }
 
 .pp-hero-1 {
-  margin: 0 40px;
-  border-radius: 48px;
+ /* margin: 0 40px;*/
+  /*border-radius: 48px;*/
   position: relative;
   padding: 150px 0 0;
   z-index: 999;
-  margin-top: 40px;
+  /*margin-top: 40px;*/
 }
 @media (max-width: 1199px) {
   .pp-hero-1 {
