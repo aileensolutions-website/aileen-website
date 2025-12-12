@@ -3601,8 +3601,9 @@ span {
   height: 100%;
 }
 .pp-hero-1 .pp-hero-content {
+  margin-top: 50px;
   text-align: center;
-  margin-bottom: 48px;
+
 }
 .pp-hero-1 .pp-hero-content h1 {
   color: var(--pp-white);
@@ -5918,7 +5919,6 @@ span {
   transform-origin: bottom center;
   z-index: -1;
   border-radius: 16px;
-  
 }
 .pp-hosting-box-items .icon {
   width: 70px;
@@ -6320,5 +6320,8 @@ span {
 }
 
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> bd21e61a370535d18d706b3aca7543f189092745
