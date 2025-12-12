@@ -30,7 +30,20 @@
     <!--<< Main.css >>-->
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/motion-sections.css">
-    
+
+    <!-- ✅ เพิ่ม: smooth scroll + กัน header sticky บังหัวข้อ -->
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* กัน section โดน header sticky บัง */
+        section[id],
+        footer[id] {
+            scroll-margin-top: 110px;
+            /* ปรับได้ตามความสูง header */
+        }
+    </style>
 </head>
 
 <body>
@@ -198,11 +211,13 @@
 
                                     <li class="has-dropdown active menu-thumb">
 
-
-                                        <a href="index.html">
+                                        <!-- ✅ แก้: จาก index.html -> #home (เลื่อนในหน้า) -->
+                                        <a href="#home">
                                             Home
                                         </a>
-                                        <ul class="submenu has-homemenu">
+
+                                        <!-- ✅ ของเดิมยังอยู่ (Multi Page) -->
+                                        <!-- <ul class="submenu has-homemenu">
                                             <li>
                                                 <div class="homemenu-items">
                                                     <div class="homemenu">
@@ -255,19 +270,39 @@
                                                     </div>
                                                 </div>
                                             </li>
-                                        </ul>
+                                        </ul> -->
                                     </li>
+
                                     <li class="has-dropdown active d-xl-none">
-                                        <a href="index.html" class="border-none">
+                                        <!-- ✅ แก้: จาก index.html -> #home (เลื่อนในหน้า) -->
+                                        <a href="#home" class="border-none">
                                             Home
                                         </a>
+
+                                        <!-- ✅ ของเดิมยังอยู่ -->
                                         <ul class="submenu">
                                             <li><a href="index.html">Ai Software</a></li>
                                             <li><a href="index-2.html">Marketing</a></li>
                                             <li><a href="index-3.html">Hosting Service</a></li>
                                         </ul>
                                     </li>
-                                    <li class="has-dropdown">
+
+                                    <!-- ✅ เพิ่มเมนูเลื่อนในหน้า (ไม่ยุ่ง Pages/Blog/Project เดิม) -->
+                                    <li>
+                                        <a href="#services">Services</a>
+                                    </li>
+                                    <li>
+                                        <a href="#customers">Customers</a>
+                                    </li>
+                                    <li>
+                                        <a href="#strengths">Our Strengths</a>
+                                    </li>
+                                    <li>
+                                        <a href="#contact">Contact Us</a>
+                                    </li>
+
+                                    <!-- ✅ ของเดิม: Pages (ไปหน้าอื่น) -->
+                                    <!-- <li class="has-dropdown">
                                         <a href="news.html">
                                             Pages
                                         </a>
@@ -285,8 +320,10 @@
                                             </li>
                                             <li><a href="pricing.html">Our Pricing</a></li>
                                         </ul>
-                                    </li>
-                                    <li>
+                                    </li> -->
+
+                                    <!-- ✅ ของเดิม: Services (ไปหน้าอื่น) -->
+                                    <!-- <li>
                                         <a href="service-details.html">
                                             Services
                                         </a>
@@ -294,8 +331,10 @@
                                             <li><a href="service.html">Service Page</a></li>
                                             <li><a href="service-details.html">Service Details</a></li>
                                         </ul>
-                                    </li>
-                                    <li>
+                                    </li> -->
+
+                                    <!-- ✅ ของเดิม: Project -->
+                                    <!-- <li>
                                         <a href="project-details.html">
                                             Project
                                         </a>
@@ -303,8 +342,10 @@
                                             <li><a href="project.html">Project Page</a></li>
                                             <li><a href="project-details.html">Project Details</a></li>
                                         </ul>
-                                    </li>
-                                    <li>
+                                    </li> -->
+
+                                    <!-- ✅ ของเดิม: Blog -->
+                                    <!-- <li>
                                         <a href="news-details.html">
                                             Blog
                                         </a>
@@ -313,16 +354,18 @@
                                             <li><a href="news.html">Blog Standard</a></li>
                                             <li><a href="news-details.html">Blog Details</a></li>
                                         </ul>
-                                    </li>
-                                    <li>
-                                        <a href="contact.html">Contact Us</a>
-                                    </li>
+                                    </li> -->
+
+                                    <!-- ✅ ของเดิม: Contact Us (ไปหน้าอื่น) -->
+
+
                                 </ul>
                             </nav>
                         </div>
                     </div>
                     <div class="header-right d-flex justify-content-end align-items-center">
-                        <a href="contact.html" class="pp-theme-btn">
+                        <!-- ✅ แก้: ปุ่มขวาบน จาก contact.html -> #contact (เลื่อนในหน้า) -->
+                        <a href="#contact" class="pp-theme-btn">
                             CONTACT US <i class="fa-solid fa-arrow-right-long"></i>
                         </a>
                         <div class="header__hamburger d-xl-none my-auto">
@@ -344,7 +387,8 @@
 
 
     <!-- pp Hero Section Start -->
-    <section class="pp-hero-section pp-hero-1 fix">
+    <!-- ✅ เพิ่ม id="home" -->
+    <section id="home" class="pp-hero-section pp-hero-1 fix">
         <div class="top-shape">
             <img src="assets/img/home-1/hero/Main BG_1.gif" alt="gif">
         </div>
@@ -364,9 +408,9 @@
                             experienced consulting from process and quality to <br>Automation and AI — Empowering
                             business efficiency and growth.</p>
                         <div class="pp-hero-button">
-                            <a href="contact.html" class="pp-theme-btn wow fadeInUp" data-wow-delay=".3s">Get To Know Us
+                            <a href="#about" class="pp-theme-btn wow fadeInUp" data-wow-delay=".3s">Get To Know Us
                                 <i class="fa-solid fa-arrow-right-long"></i></a>
-                            <a href="about.html" class="pp-theme-btn pp-style-2 wow fadeInUp"
+                            <a href="#contact" class="pp-theme-btn pp-style-2 wow fadeInUp"
                                 data-wow-delay=".3s">Contact Us <i class="fa-solid fa-arrow-right-long"></i></a>
                         </div>
                     </div>
@@ -448,10 +492,12 @@
 
 
     <!-- Pp-About Section Start -->
-    <section class="pp-about-section section-padding fix" style="background-color: ghostwhite;">
-        <div class="container">
+    <!-- ✅ เพิ่ม id="about" -->
+    <section id="about" class="pp-about-section section-padding fix" style="background-color: ghostwhite;">
+        <div class="container" style="margin-top: 100px; margin-bottom: 100px;">
             <div class="pp-about-wrapper-2">
-                <div class="row g-4 align-items-center">
+                <!-- ✅ เปลี่ยน align-items-center -> align-items-stretch เพื่อให้คอลัมน์ขวายืดเต็มความสูง -->
+                <div class="row g-4 align-items-stretch">
                     <div class="col-lg-6">
                         <div class="pp-about-content">
                             <div class="pp-section-title mb-0">
@@ -488,186 +534,44 @@
                                     </p>
                                 </div>
                             </div>
-                            <a href="about.html" class="pp-theme-btn wow fadeInUp" data-wow-delay=".3s">About Us<i
-                                    class="fa-solid fa-arrow-right-long"></i></a>
+                            <!-- <a href="about.html" class="pp-theme-btn wow fadeInUp" data-wow-delay=".3s">About Us<i
+                                    class="fa-solid fa-arrow-right-long"></i></a> -->
                         </div>
                     </div>
+
+                    <!-- ✅ NEW: รูปฝั่งขวาแบบ “เต็มพื้นที่” โดยไม่ต้องแก้ CSS (ใช้ inline-style ล้วน) -->
                     <div class="col-lg-6">
+                        <div
+                            style="
+                                width:100%;
+                                height:100%;
+                                min-height:520px;              /* ปรับได้ ถ้าต้องการสูง/เตี้ย */
+                                border-radius:18px;
+                                overflow:hidden;
+                                display:block;
+                            ">
+                            <img
+                                src="assets/img/logo/image.png"
+                                alt="Aileen Solutions"
+                                style="
+                                    width:100%;
+                                    height:100%;
+                                    object-fit:cover;           /* ✅ ให้รูปเต็มกรอบ */
+                                    display:block;
+                                ">
+                        </div>
+                    </div>
+
+                    <!-- <div class="col-lg-6">
                         <div class="pp-about-image">
                             <div class="container">
-                                    <div class="stage" id="stage">
-                                        <svg class="lines" id="lines" viewBox="0 0 100 100" preserveAspectRatio="none"
-                                            aria-hidden="true">
-                                            <defs>
-                                                <!-- แนวนอน: ฟ้าอ่อน→ฟ้า -->
-                                                <linearGradient id="gAB" x1="0" y1="0" x2="100" y2="0"
-                                                    gradientUnits="userSpaceOnUse">
-                                                    <stop offset="40%" stop-color="#4db6ac" />
-                                                    <stop offset="100%" stop-color="#3396dd" />
-                                                </linearGradient>
-                                                <linearGradient id="g67" x1="0" y1="0" x2="100" y2="0"
-                                                    gradientUnits="userSpaceOnUse">
-                                                    <stop offset="40%" stop-color="#4db6ac" />
-                                                    <stop offset="100%" stop-color="#3396dd" />
-                                                </linearGradient>
-                                                <linearGradient id="g2H1" x1="0" y1="0" x2="100" y2="0"
-                                                    gradientUnits="userSpaceOnUse">
-                                                    <stop offset="40%" stop-color="#4db6ac" />
-                                                    <stop offset="100%" stop-color="#3396dd" />
-                                                </linearGradient>
-                                                <linearGradient id="g2H12" x1="0" y1="0" x2="100" y2="0"
-                                                    gradientUnits="userSpaceOnUse">
-                                                    <stop offset="40%" stop-color="#4db6ac" />
-                                                    <stop offset="100%" stop-color="#3396dd" />
-                                                </linearGradient>
-                                                <linearGradient id="g2H2" x1="0" y1="0" x2="100" y2="0"
-                                                    gradientUnits="userSpaceOnUse">
-                                                    <stop offset="40%" stop-color="#4db6ac" />
-                                                    <stop offset="100%" stop-color="#3396dd" />
-                                                </linearGradient>
-
-                                                <!-- แนวตั้ง: ฟ้า→ม่วง -->
-                                                <linearGradient id="gBC" x1="0" y1="0" x2="0" y2="100"
-                                                    gradientUnits="userSpaceOnUse">
-                                                    <stop offset="40%" stop-color="#4db6ac" />
-                                                    <stop offset="100%" stop-color="#3396dd" />
-                                                </linearGradient>
-                                                <linearGradient id="gV2" x1="0" y1="0" x2="0" y2="100"
-                                                    gradientUnits="userSpaceOnUse">
-                                                    <stop offset="40%" stop-color="#4db6ac" />
-                                                    <stop offset="100%" stop-color="#3396dd" />
-                                                </linearGradient>
-                                                <linearGradient id="gUp" x1="0" y1="0" x2="0" y2="100"
-                                                    gradientUnits="userSpaceOnUse">
-                                                    <stop offset="40%" stop-color="#4db6ac" />
-                                                    <stop offset="100%" stop-color="#3396dd" />
-                                                </linearGradient>
-                                                <linearGradient id="gDn1" x1="0" y1="0" x2="0" y2="100"
-                                                    gradientUnits="userSpaceOnUse">
-                                                    <stop offset="40%" stop-color="#4db6ac" />
-                                                    <stop offset="100%" stop-color="#3396dd" />
-                                                </linearGradient>
-                                                <linearGradient id="gDn2" x1="0" y1="0" x2="0" y2="100"
-                                                    gradientUnits="userSpaceOnUse">
-                                                    <stop offset="40%" stop-color="#4db6ac" />
-                                                    <stop offset="100%" stop-color="#3396dd" />
-                                                </linearGradient>
-                                                <linearGradient id="g2V" x1="0" y1="0" x2="0" y2="100"
-                                                    gradientUnits="userSpaceOnUse">
-                                                    <stop offset="40%" stop-color="#4db6ac" />
-                                                    <stop offset="100%" stop-color="#3396dd" />
-                                                </linearGradient>
-                                            </defs>
-
-                                            <!-- g0 (9→6) -->
-                                            <path class="seg ab" id="lineAB" d="" pathLength="1" stroke="url(#gAB)" />
-                                            <path class="seg bc" id="lineBC" d="" pathLength="1" stroke="url(#gBC)" />
-                                            <path class="seg v2" id="lineV2" d="" pathLength="1" stroke="url(#gV2)" />
-
-                                            <!-- g1 (6→7 แตกกิ่ง) -->
-                                            <path class="seg g1 g1h" id="line67" d="" pathLength="1"
-                                                stroke="url(#g67)" />
-                                            <path class="seg g1 up" id="line7_up" d="" pathLength="1"
-                                                stroke="url(#gUp)" />
-                                            <path class="seg g1 dn1" id="line7_10" d="" pathLength="1"
-                                                stroke="url(#gDn1)" />
-                                            <path class="seg g1 dn2" id="line10_12" d="" pathLength="1"
-                                                stroke="url(#gDn2)" />
-
-                                            <!-- g2 split -->
-                                            <path class="seg g2h1" id="g2_h1" d="" pathLength="1" stroke="url(#g2H1)" />
-                                            <!-- 2→3 -->
-                                            <path class="seg g2h12" id="g2_h12" d="" pathLength="1"
-                                                stroke="url(#g2H12)" />
-                                            <!-- 12→13 -->
-                                            <path class="seg g2v" id="g2_v" d="" pathLength="1" stroke="url(#g2V)" />
-                                            <!-- 13→15 -->
-                                            <path class="seg g2h2" id="g2_h2" d="" pathLength="1" stroke="url(#g2H2)" />
-                                            <!-- 15→16 -->
-                                        </svg>
-
-                                        <!-- GRID -->
-                                        <div class="grid" id="grid">
-                                            <div class="tile" data-id="1" data-group="4">
-                                                <img src="assets/img/home-1/icon/setting.png" width="50%">
-                                            </div>
-                                            <div class="tile" data-id="2" data-group="1,2">
-                                                <svg viewBox="0 0 24 24">
-                                                    <circle cx="12" cy="12" r="10" />
-                                                </svg>
-                                            </div>
-                                            <div class="tile" data-id="3" data-group="2">
-                                                <svg viewBox="0 0 24 24">
-                                                    <ellipse cx="12" cy="5" rx="9" ry="3" />
-                                                </svg>
-                                            </div>
-                                            <div class="tile" data-id="4" data-group="4">
-                                                <svg viewBox="0 0 24 24">
-                                                    <path d="M3 21l2-6a9 9 0 1 1 4 4z" />
-                                                </svg>
-                                            </div>
-                                            <div class="tile" data-id="5" data-group="4" style="display: none">
-                                                <svg viewBox="0 0 24 24">
-                                                    <path d="M2 7h20v13H2z" />
-                                                </svg>
-                                            </div>
-                                            <div class="tile" data-id="6" data-group="0,1">
-                                                  <img src="assets/img/home-1/icon/logo" width="50%">
-                                            </div>
-                                            <div class="tile" data-id="7" data-group="1">
-                                                <svg viewBox="0 0 24 24">
-                                                    <path d="M3 12h18M12 3v18" />
-                                                </svg>
-                                            </div>
-                                            <div class="tile" data-id="8" data-group="4">
-                                                <img src="assets/img/home-1/icon/setting.png" width="50%">
-                                            </div>
-                                            <div class="tile" data-id="9" data-group="0">
-                                                <img src="assets/img/home-1/icon/Asset 4.png" >
-                                            </div>
-                                            <div class="tile" data-id="10" data-group="1">
-                                                <svg viewBox="0 0 24 24">
-                                                    <path d="M3 3v18h18" />
-                                                </svg>
-                                            </div>
-                                            <div class="tile" data-id="11" data-group="0">
-                                                <svg viewBox="0 0 24 24">
-                                                    <path d="M12 2v16" />
-                                                </svg>
-                                            </div>
-                                            <div class="tile" data-id="12" data-group="1,2">
-                                                <svg viewBox="0 0 24 24">
-                                                    <rect x="6" y="2" width="12" height="20" rx="2" />
-                                                </svg>
-                                            </div>
-                                            <div class="tile" data-id="13" data-group="2">
-                                                <svg viewBox="0 0 24 24">
-                                                    <path d="M2 7h20v13H2z" />
-                                                </svg>
-                                            </div>
-                                            <div class="tile" data-id="14" data-group="4">
-                                                <svg viewBox="0 0 24 24">
-                                                    <rect x="3" y="4" width="18" height="18" rx="2" />
-                                                </svg>
-                                            </div>
-                                            <div class="tile" data-id="15" data-group="2">
-                                                <svg viewBox="0 0 24 24">
-                                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5" />
-                                                </svg>
-                                            </div>
-                                            <div class="tile" data-id="16" data-group="2">
-                                                <svg viewBox="0 0 24 24">
-                                                    <path d="M16 16h3a3 3 0 0 1 0 6H7a5 5 0 1 1 0-10" />
-                                                </svg>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="stage" id="stage">
+                                    ...
                                 </div>
-                                <script src="assets/js/motion-sections.js"></script>
-                            
-                            
+                            </div>
+                            <script src="assets/js/motion-sections.js"></script>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -677,70 +581,85 @@
 
 
     <!-- Hosting Section Start -->
-    <section class="hosting-section fix section-padding">
-        <div class="container">
+    <!-- ✅ เพิ่ม id="services" -->
+    <section id="services" class="hosting-section fix section-padding">
+        <div class="container" style="margin-top: 100px; margin-bottom: 100px;">
             <div class="pp-section-title-area">
                 <div class="pp-section-title">
                     <span class="pp-sub-title pp-style-border wow fadeInUp">Key features</span>
                     <h2 class="wow fadeInUp" data-wow-delay=".3s">Our Solutions <br>& Services</h2>
                 </div>
-                <a href="service.html" class="pp-theme-btn style-3 wow fadeInUp" data-wow-delay=".5s">See all Solutions
-                    <i class="fa-solid fa-arrow-right-long"></i></a>
+                <!-- <a href="service.html" class="pp-theme-btn style-3 wow fadeInUp" data-wow-delay=".5s">See all Solutions
+                    <i class="fa-solid fa-arrow-right-long"></i></a> -->
             </div>
             <div class="row">
                 <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s">
                     <div class="pp-hosting-box-items">
-                        <div class="icon">
-                            <i class="fa-solid fa-cloud"></i>
+                        <div class="">
+                            <img src="assets/img/home-1/feature/QMS_1.png" width="100%">
                         </div>
                         <div class="content">
-                            <h3><a href="service-details.html">Quality Management Platform</a></h3>
-                            <p>Collaboratively formulate principle capital. Progressively evolve user revolutionary
-                                hosting services.</p>
-                            <a href="service-details.html" class="pp-theme-btn mt-4">Read More <i
-                                    class="fa-solid fa-arrow-right-long"></i></a>
+                            <h3><br><a href="service-details.html">Quality Management Platform</a></h3>
+                            <p>ระบบจัดการคุณภาพ ที่ใช้รายงาน,
+                                ควบคุม, ตรวจสอบ, และดำเนินการพัฒนา
+                                คุณภาพขององค์กร เพื่อลดข้อผิดพลาด
+                                จากกระบวนการที่ซ้ำซ้อน และสามารถ
+                                ติดตามการทำงานได้ทุกขั้นตอน ช่วยยกระดับมาตรฐานการทำงานได้รวดเร็ว</p>
+                            <!-- <a href="service-details.html" class="pp-theme-btn mt-4">Read More <i
+                                    class="fa-solid fa-arrow-right-long"></i></a> -->
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".4s">
                     <div class="pp-hosting-box-items">
-                        <div class="icon">
-                            <i class="fa-solid fa-user-group"></i>
+                        <div class="">
+                            <img src="assets/img/home-1/feature/lowcode.png" width="90%">
                         </div>
                         <div class="content">
                             <h3><a href="service-details.html">Low-Code <br>Business Orchestrator</a></h3>
-                            <p>Nullam dignissim eros ut elit luctus, a ullamcorper risus tristique. Donec imperdiet elit
-                                at mi commodo.</p>
-                            <a href="service-details.html" class="pp-theme-btn mt-4">Read More <i
-                                    class="fa-solid fa-arrow-right-long"></i></a>
+                            <p> แพลตฟอร์มพัฒนาระบบงานในรูปแบบ
+                                Low-Code ช่วยให้ IT และ Users สามารถทำงาน
+                                ร่วมกันและสร้าง Business Workflow
+                                ในองค์กรได้รวดเร็วยิ่งขึ้น
+                                บริหารการทำงานและตรวจสอบได้ Real-time
+                                พัฒนา Workflow ได้เร็วขึ้น 3–5 เท่า </p>
+                            <!-- <a href="service-details.html" class="pp-theme-btn mt-4">Read More <i
+                                    class="fa-solid fa-arrow-right-long"></i></a> -->
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".6s">
                     <div class="pp-hosting-box-items">
-                        <div class="icon">
-                            <i class="fa-solid fa-globe"></i>
+                        <div class="">
+                            <img src="assets/img/home-1/feature/PMS.png" width="90%">
+
                         </div>
                         <div class="content">
                             <h3><a href="service-details.html">Process Management Platform​</a></h3>
-                            <p>In vestibulum dui a odio pharetra, nec accumsan sapien consectetur. Pellentesque magna
-                                risus, volutpat.</p>
-                            <a href="service-details.html" class="pp-theme-btn mt-4">Read More <i
-                                    class="fa-solid fa-arrow-right-long"></i></a>
+                            <p> การบริหารจัดการ “กระบวนการทำงาน”
+                                เปลี่ยนจากกระดาษหรือ Visio (เช่น BPMN, SOP)
+                                ยกระดับเข้าสู่ระบบที่มีมาตรฐานเดียวกัน
+                                สามารถค้นหา, ตรวจสอบ, แก้ไขได้ เพื่อสนับสนุน
+                                การทำงานร่วมกัน และการปรับปรุงกระบวนการ </p>
+                            <!-- <a href="service-details.html" class="pp-theme-btn mt-4">Read More <i
+                                    class="fa-solid fa-arrow-right-long"></i></a> -->
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".8s">
                     <div class="pp-hosting-box-items">
-                        <div class="icon">
-                            <i class="fa-solid fa-earth"></i>
+                        <div class="">
+                            <img src="assets/img/home-1/feature/RPA.png" width="85%">
                         </div>
                         <div class="content">
                             <h3><a href="service-details.html">Robotic Process <br>Automation <br>(RPA)</a></h3>
-                            <p>Duis congue eget neque sit amet mollis. Aliquam auctor diam sit amet efficitur
-                                condimentum. Aliquam vitae</p>
-                            <a href="service-details.html" class="pp-theme-btn mt-4">Read More <i
-                                    class="fa-solid fa-arrow-right-long"></i></a>
+                            <p>หุ่นยนต์ซอฟต์แวร์ (Robot) ที่ทำหน้าที่
+                                เป็นผู้ช่วยส่วนตัว สำหรับงานซ้ำซ้อน ที่มีรูปแบบ
+                                แน่นอน สามารถทำงานได้ 24/7 เช่น การคัดลอก,
+                                กรอกข้อมูล, การตรวจสอบและรวบรวมข้อมูล
+                                รวมถึงการบันทึกข้อมูลเข้าสู่ระบบ</p>
+                            <!-- <a href="service-details.html" class="pp-theme-btn mt-4">Read More <i
+                                    class="fa-solid fa-arrow-right-long"></i></a> -->
                         </div>
                     </div>
                 </div>
@@ -750,43 +669,52 @@
             <div class="row">
                 <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s">
                     <div class="pp-hosting-box-items">
-                        <div class="icon">
-                            <i class="fa-solid fa-cloud"></i>
+                        <div class="">
+                            <img src="assets/img/home-1/feature/domainAI.png" width="85%">
                         </div>
                         <div class="content">
                             <h3><a href="service-details.html">Domain-Specific Generative AI</a></h3>
-                            <p>Collaboratively formulate principle capital. Progressively evolve user revolutionary
-                                hosting services.</p>
-                            <a href="service-details.html" class="pp-theme-btn mt-4">Read More <i
-                                    class="fa-solid fa-arrow-right-long"></i></a>
+                            <p>ก้าวสู่อนาคตของธุรกิจด้วย AI ที่เข้าใจบริบท
+                                ของภาษาไทย ยกระดับการค้นหา, การสื่อสาร,
+                                การบริการ และวิเคราะห์ข้อมูล ตอบโจทย์
+                                การทำงานเฉพาะองค์กร ลดภาระงาน ลดเวลาและทรัพยากรในการทำงาน
+                                เพิ่มประสบการณ์ที่เหนือกว่า</p>
+                            <!-- <a href="service-details.html" class="pp-theme-btn mt-4">Read More <i
+                                    class="fa-solid fa-arrow-right-long"></i></a> -->
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".4s">
                     <div class="pp-hosting-box-items">
-                        <div class="icon">
-                            <i class="fa-solid fa-user-group"></i>
+                        <div class="">
+                            <img src="assets/img/home-1/feature/SPC.png" width="80%">
                         </div>
                         <div class="content">
                             <h3><a href="service-details.html">Supply Chain Resilience</a></h3>
-                            <p>Nullam dignissim eros ut elit luctus, a ullamcorper risus tristique. Donec imperdiet elit
-                                at mi commodo.</p>
-                            <a href="service-details.html" class="pp-theme-btn mt-4">Read More <i
-                                    class="fa-solid fa-arrow-right-long"></i></a>
+                            <p>แพลตฟอร์มห่วงโซ่อุปทานดิจิทัลแบบครบวงจร
+                                ที่ผสานรวมคำสั่งซื้อ, สินค้าคงคลัง, คลังสินค้า
+                                การขนส่ง และการจัดการทางการเงิน
+                                ได้อย่างราบรื่น ลดความเสี่ยงต่าง ๆ ที่จะเกิดขึ้น
+                                ได้รวดเร็วและมีประสิทธิภาพ
+                                ตอบสนองการเปลี่ยนแปลงของตลาดได้รวดเร็ว
+                            </p>
+                            <!-- <a href="service-details.html" class="pp-theme-btn mt-4">Read More <i
+                                    class="fa-solid fa-arrow-right-long"></i></a> -->
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".6s">
                     <div class="pp-hosting-box-items">
-                        <div class="icon">
-                            <i class="fa-solid fa-globe"></i>
+                        <div class="">
+                            <img src="assets/img/home-1/feature/ERP.png" width="100%">
                         </div>
                         <div class="content">
                             <h3><a href="service-details.html">ERP <br>Workspace​</a></h3>
-                            <p>In vestibulum dui a odio pharetra, nec accumsan sapien consectetur. Pellentesque magna
-                                risus, volutpat.</p>
-                            <a href="service-details.html" class="pp-theme-btn mt-4">Read More <i
-                                    class="fa-solid fa-arrow-right-long"></i></a>
+                            <p>แพลตฟอร์มบริหารจัดการธุรกิจแบบบูรณาการ ช่วยจัดระเบียบ Workflow
+                                การทำงานที่ซับซ้อนให้ง่ายขึ้น ติดตามสถานะการดำเนินงานได้แบบ Real-time
+                                พร้อมเครื่องมือครบครันที่ช่วยขับเคลื่อนธุรกิจให้เดินหน้าได้อย่างมั่นคงและรวดเร็ว</p>
+                            <!-- <a href="service-details.html" class="pp-theme-btn mt-4">Read More <i
+                                    class="fa-solid fa-arrow-right-long"></i></a> -->
                         </div>
                     </div>
                 </div>
@@ -798,97 +726,355 @@
         </div>
     </section>
 
-    <!-- Pp-How-Wowk Section Start -->
-    <section class="pp-how-work-section section-padding fix section-bg-2">
-        <div class="top-shape">
-            <img src="assets/img/home-1/feature/bg-shape.png" alt="img">
-        </div>
-        <div class="line-shape">
-            <img src="assets/img/home-1/feature/line.png" alt="img">
-        </div>
+
+    <!-- ✅ เพิ่ม id="customers" -->
+    <section id="customers" class="pp-how-work-section section-padding fix section-bg-2"
+        style="position:relative; overflow:hidden; height: 780px;">
+
         <div class="container">
             <div class="pp-section-title text-center">
-                <span class="pp-sub-title wow fadeInUp">
-                    HOW IT WORKS
-                    <span class="pp-style-2"></span>
+                <span class="pp-sub-title wow fadeInUp" style="color: white;">
+                    Our Customers <span class="pp-style-2"></span>
                 </span>
-                <h2 class="text-white wow fadeInUp" data-wow-delay=".3s">
-                    Marketing Made Simple
+                <h2 class="text-white wow fadeInUp" data-wow-delay=".3s">Customer In Last 6 Years</h2>
+            </div>
+        </div>
+
+        <div id="customerTimelineStage" style="position:relative; height:320px; margin-top:50px;">
+
+            <!-- SVG วาดเส้น + จุด -->
+            <svg id="customerTimelineSvg" aria-hidden="true"
+                style="position:absolute; inset:0; width:100%; height:100%; z-index:1; pointer-events:none;">
+
+                <!-- ✅ สีเส้นโทนเดียวกับปุ่ม + glow -->
+                <defs>
+                    <linearGradient id="tlTeal" x1="0" y1="0" x2="1" y2="0">
+                        <stop offset="0%" stop-color="#0C8792"></stop>
+                        <stop offset="100%" stop-color="#38B69E"></stop>
+                    </linearGradient>
+
+                    <filter id="tlGlow" x="-30%" y="-30%" width="160%" height="160%">
+                        <feGaussianBlur stdDeviation="2.2" result="blur"></feGaussianBlur>
+                        <feMerge>
+                            <feMergeNode in="blur"></feMergeNode>
+                            <feMergeNode in="SourceGraphic"></feMergeNode>
+                        </feMerge>
+                    </filter>
+                </defs>
+
+                <path id="customerTimelinePath" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" filter="#fff"></path>
+
+                <g id="customerTimelineDots"></g>
+            </svg>
+
+            <!-- Nodes -->
+            <div id="customerTimelineNodes" style="position:absolute; inset:0; z-index:2;">
+
+                <div class="pp-how-work-items text-center" data-side="up" data-gap="28"
+                    style="position:absolute; transform:translate(-50%,-50%); width:180px;">
+                    <img class="img-fluid" src="assets/img/home-1/brand/McDonalds-Logo.png" alt="Customer 2018"
+                        style="width: 30%; padding-bottom: 20px;"><br>
+                    <img class="img-fluid" src="assets/img/home-1/brand/GC.webp" alt="Customer 2018"
+                        style="margin-bottom: 10px; width: 80%;">
+                    <br>
+                    <h6 style="margin-top: 20px; position: relative; top: 60px; ">2018</h6>
+                </div>
+
+                <div class="pp-how-work-items pp-style-2 text-center" data-side="down" data-gap="28"
+                    style="position:absolute; transform:translate(-50%,-50%); width:180px; margin-top: -40px;">
+                    <img class="img-fluid" src="assets/img/home-1/brand/AGC.png" alt="Customer 2019"
+                        style="margin-bottom: 70px; width: 70%;">
+                    <h6 style="">2019</h6>
+
+                </div>
+
+                <div class="pp-how-work-items pp-style-2 text-center" data-side="down" data-gap="28"
+                    style="position:absolute; transform:translate(-50%,-50%); width:180px; margin-top: -40px;">
+                    <img class="img-fluid" src="assets/img/home-1/brand/HMC.png" alt="Customer 2019"
+                        style="margin-bottom: 70px; width: 80%;">
+                    <h6 style="">2020</h6>
+
+                </div>
+
+                <div class="pp-how-work-items pp-style-2 text-center" data-side="down" data-gap="34"
+                    style="position:absolute; transform:translate(-50%,-50%); width:190px; margin-top: 30px;">
+                    <h6 style=" margin-bottom: 70px;">2021</h6>
+                    <img class="img-fluid mb-2" src="assets/img/home-1/brand/ptt-digital.png" style="width: 70%;"
+                        alt="Customer 2021-1">
+                    <img class="img-fluid" src="assets/img/home-1/brand/ptt-asahi.png" alt="Customer 2021-2"
+                        style="width: 80%;">
+                </div>
+
+                <div class="pp-how-work-items text-center" data-side="up" data-gap="28"
+                    style="position:absolute; transform:translate(-50%,-50%); width:180px; margin-top: 50px;">
+                    <h6 style="margin-bottom: 60px;">2022</h6>
+                    <img class="img-fluid" src="assets/img/home-1/brand/egat.png" alt="Customer 2022"
+                        style="width: 80%;">
+                </div>
+
+                <div class="pp-how-work-items pp-style-2 text-center" data-side="down" data-gap="28"
+                    style="position:absolute; transform:translate(-50%,-50%); width:190px; margin-top: 50px;">
+                    <h6 style="  margin-bottom: 50px; ">2023</h6><br>
+                    <img class="img-fluid mb-2" src="assets/img/home-1/brand/ptt_lng.png" alt="Customer 2023-1"
+                        style="width: 60%;">
+                    <img class="img-fluid" src="assets/img/home-1/brand/ggc.png" alt="Customer 2023-2"
+                        style="width: 70%;">
+                </div>
+
+                <div class="pp-how-work-items pp-style-2 text-center" data-side="down" data-gap="28"
+                    style="position:absolute; transform:translate(-50%,-50%); width:190px; margin-top: -70px;">
+
+                    <img class="img-fluid mb-2" src="assets/img/home-1/brand/npc.png" alt="Customer 2024-1"
+                        style="width: 70%;">
+                    <img class="img-fluid" src="assets/img/home-1/brand/ptt.png" alt="Customer 2024-2"
+                        style="width: 70%; padding-bottom: 10px;"><br>
+                    <!-- <img class="img-fluid" src="assets/img/home-1/brand/thai_rtl.png" alt="Customer 2024-3" style="width: 65%;"> -->
+
+                    <h6 style="margin-top: 90px; ">2024</h6>
+                </div>
+
+            </div>
+        </div>
+
+        <script>
+            (function () {
+                const NS = "http://www.w3.org/2000/svg";
+                let rafId = null;
+
+                function catmullRom2bezier(points) {
+                    if (points.length < 2) return "";
+                    let d = `M ${points[0].x} ${points[0].y}`;
+                    for (let i = 0; i < points.length - 1; i++) {
+                        const p0 = points[i - 1] || points[i];
+                        const p1 = points[i];
+                        const p2 = points[i + 1];
+                        const p3 = points[i + 2] || p2;
+
+                        const c1x = p1.x + (p2.x - p0.x) / 6;
+                        const c1y = p1.y + (p2.y - p0.y) / 6;
+                        const c2x = p2.x - (p3.x - p1.x) / 6;
+                        const c2y = p2.y - (p3.y - p1.y) / 6;
+
+                        d += ` C ${c1x} ${c1y}, ${c2x} ${c2y}, ${p2.x} ${p2.y}`;
+                    }
+                    return d;
+                }
+
+                function layout() {
+                    const stage = document.getElementById("customerTimelineStage");
+                    const svg = document.getElementById("customerTimelineSvg");
+                    const path = document.getElementById("customerTimelinePath");
+                    const dotsG = document.getElementById("customerTimelineDots");
+                    const nodes = Array.from(document.querySelectorAll("#customerTimelineNodes > div"));
+                    if (!stage || !svg || !path || !dotsG || nodes.length === 0) return;
+
+                    const rect = stage.getBoundingClientRect();
+                    const w = rect.width;
+                    const h = rect.height;
+
+                    svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
+                    svg.setAttribute("preserveAspectRatio", "none");
+
+                    // ✅ เส้นไม่สุดขอบ: เพิ่ม padX ให้ชัดขึ้น (ตามรูป)
+                    const padX = Math.max(90, w * 0.14);
+                    const usable = Math.max(1, w - padX * 2);
+
+                    const midY = h * 0.55;
+                    const amp = Math.min(70, h * 0.20);
+                    const freq = 1.15;
+
+                    const pts = nodes.map((_, i) => {
+                        const t = (nodes.length === 1) ? 0 : (i / (nodes.length - 1));
+                        const x = padX + usable * t;
+                        const y = midY + Math.sin((t * Math.PI * 2) * freq) * amp;
+                        return { x, y };
+                    });
+
+                    path.setAttribute("d", catmullRom2bezier(pts));
+
+                    // ✅ จุดโทนเดียวกับเส้น (stroke gradient ใช้กับ circle ไม่ง่าย)
+                    dotsG.innerHTML = "";
+                    pts.forEach((p) => {
+                        const c = document.createElementNS(NS, "circle");
+                        c.setAttribute("cx", p.x);
+                        c.setAttribute("cy", p.y);
+                        c.setAttribute("r", 4);
+                        c.setAttribute("fill", "#071a23");
+                        c.setAttribute("stroke", "#fff");
+                        c.setAttribute("stroke-width", "1");
+                        dotsG.appendChild(c);
+                    });
+
+                    nodes.forEach((el, i) => {
+                        const side = (el.dataset.side || "up").toLowerCase();
+                        const gap = parseFloat(el.dataset.gap || "28");
+
+                        const p = pts[i];
+                        let x = p.x;
+                        let y = p.y + (side === "down" ? gap : -gap);
+
+                        const pad = 12;
+                        x = Math.max(pad, Math.min(w - pad, x));
+                        y = Math.max(pad, Math.min(h - pad, y));
+
+                        el.style.left = x + "px";
+                        el.style.top = y + "px";
+                    });
+                }
+
+                function requestLayout() {
+                    if (rafId) cancelAnimationFrame(rafId);
+                    rafId = requestAnimationFrame(layout);
+                }
+
+                window.addEventListener("load", requestLayout);
+                window.addEventListener("resize", requestLayout);
+            })();
+        </script>
+
+    </section>
+
+
+
+    <!-- ✅ เพิ่ม id="strengths" -->
+    <section id="strengths" class="pp-why-benefit-section section-padding fix section-bg">
+        <div class="container" style="margin-top: 100px; margin-bottom: 100px;">
+            <div class="pp-section-title text-center">
+                <span class="pp-sub-title pp-style-border wow fadeInUp">Our Strengths</span>
+                <h2 class="wow fadeInUp" data-wow-delay=".3s">
+                    Why Businesses Choose Aileen Solutions ?
                 </h2>
             </div>
             <div class="row">
                 <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s">
-                    <div class="pp-how-work-items">
-                        <h6>STEP-01</h6>
-                        <h3>Track, Analyze & Optimize</h3>
-                        <p>
-                            Aenean id est pellentesque, consequat sem et, viverra lacus. Aliquam tincidunt.
-                        </p>
+                    <div class="pp-why-benefit-item">
+                        <div class="pp-icon">
+                            <img src="assets/img/home-1/icon/simplify.png" alt="img">
+                        </div>
+                        <div class="pp-content">
+                            <h3>
+                                SIMPLICITY
+                            </h3>
+                            <p>
+                                เราเชื่อในระบบที่ใช้งานง่าย ช่วยให้ผู้ใช้เข้าใจ
+                                กระบวนการ และทำงานได้ด้วยตนเอง
+                                อย่างมีประสิทธิภาพ
+                            </p>
+                        </div>
                     </div>
                 </div>
                 <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".5s">
-                    <div class="pp-how-work-items pp-style-2">
-                        <h6>STEP-02</h6>
-                        <h3>Insight. Action. Results.</h3>
-                        <p>
-                            Mauris dignissim vel augue vel congue. Pellentesque sit amet metus tortor hendrerit.
-                        </p>
+                    <div class="pp-why-benefit-item">
+                        <div class="pp-icon">
+                            <img src="assets/img/home-1/icon/rapidly.png" alt="img">
+                        </div>
+                        <div class="pp-content">
+                            <h3>
+                                RAPIDLY
+                            </h3>
+                            <p>
+                                ให้ความสำคัญและตอบรับกับการเปลี่ยนแปลง
+                                ทางธุรกิจที่เป็นไปอย่างรวดเร็วในปัจจุบัน
+
+                            </p>
+                        </div>
                     </div>
                 </div>
                 <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".7s">
-                    <div class="pp-how-work-items">
-                        <h6>STEP-03</h6>
-                        <h3>Monitor, Measure & Improve</h3>
-                        <p>
-                            Donec eu hendrerit lorem. In ultrices erat pulvinar venenatis auctor.
-                        </p>
+                    <div class="pp-why-benefit-item">
+                        <div class="pp-icon">
+                            <img src="assets/img/home-1/icon/exp.png" alt="img">
+                        </div>
+                        <div class="pp-content">
+                            <h3>
+                                EXPERIENCE
+                            </h3>
+                            <p>
+                                เรานำเสนอโซลูชั่น
+                                ที่มีคุณภาพ เหมาะสมกับความต้องการ
+                                ตอบโจทย์ผู้ใช้งานได้อย่างตรงจุด และคุ้มค่า
+                                กับการลงทุน
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s">
+                    <div class="pp-why-benefit-item">
+                        <div class="pp-icon">
+                            <img src="assets/img/home-1/icon/platform.png" alt="img">
+                        </div>
+                        <div class="pp-content">
+                            <h3>
+                                PLATFORM
+                            </h3>
+                            <p>
+                                แพลตฟอร์มที่เชื่อถือได้และยืดหยุ่น รองรับโซลูชั่นหลากหลาย
+                                เพิ่มคุณภาพการทำงานและขยายศักยภาพทางธุรกิจ
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".5s">
+                    <div class="pp-why-benefit-item">
+                        <div class="pp-icon">
+                            <img src="assets/img/home-1/icon/heart.png" alt="img">
+                        </div>
+                        <div class="pp-content">
+                            <h3>
+                                SERVICES
+                            </h3>
+                            <p>
+                                บริการครบวงจร ครอบคลุมการบูรณาการเทคโนโลยี
+                                เพื่อยกระดับการทำงานในองค์กร และตอบโจทย์
+                                ทางธุรกิจ
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".7s">
+                    <div class="pp-why-benefit-item">
+                        <div class="pp-icon">
+                            <img src="assets/img/home-1/icon/consult.png" alt="img">
+                        </div>
+                        <div class="pp-content">
+                            <h3>
+                                CONSULTING
+
+                            </h3>
+                            <p>
+                                ที่ปรึกษามืออาชีพ ให้คำแนะนำ
+                                รวมทั้งช่วยวางแผน และขับเคลื่อน
+                                กลยุทธ์ด้วยความมั่นใจ
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+
+
+
+
 
     <!-- Pp-key-feature Section Start -->
     <section class="pp-key-feature-section section-padding pb-0 fix" style="margin-bottom: 100px;">
         <div class="container">
             <div class="pp-key-feature-wrapper">
-                <div class="row g-4">
-                    <div class="col-lg-6">
-                        <div class="pp-key-feature-image">
-                            <img src="assets/img/home-1/feature/02.jpg" alt="img">
-                            <div class="pp-key-feature-image-2 float-bob-y">
-                                <img src="assets/img/home-1/feature/01.jpg" alt="img">
-                            </div>
-                            <div class="pp-key-feature-image-3 float-bob-y">
-                                <img src="assets/img/home-1/feature/03.jpg" alt="img">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
+                <div class="row g-4 justify-content-center">
+                    <div class="col-lg-8 col-md-10 col-12 text-center">
                         <div class="pp-key-feature-content">
                             <div class="pp-section-title mb-0">
-                                <span class="pp-sub-title wow fadeInUp">KEY FEATURES</span>
-                                <h2 class="wow fadeInUp" data-wow-delay=".3s">
-                                    Intuitive Campaign Editor
-                                </h2>
+                                <span class="pp-sub-title wow fadeInUp">Let’s Build Smart Solutions Together</span>
+                                <h2 class="wow fadeInUp" data-wow-delay=".3s">CONTACT US</h2>
                             </div>
-                            <p class="pp-text wow fadeInUp" data-wow-delay=".5s">
-                                Duis congue eget neque sit amet mollis. Aliquam auctor diam sit amet efficitur
-                                condimentum. Aliquam vitae scelerisque leo, eu vulputate felis.
-                            </p>
-                            <ul class="pp-feature-list wow fadeInUp" data-wow-delay=".3s">
-                                <li>
-                                    Intuitive Drag & Drop Editor
-                                </li>
-                                <li>
-                                    Mobile-Responsive Design
-                                </li>
-                                <li>
-                                    Undo/Redo & Version History
-                                </li>
-                            </ul>
-                            <a href="about.html" class="pp-theme-btn wow fadeInUp" data-wow-delay=".5s">Read More <i
-                                    class="fa-solid fa-arrow-right-long"></i></a>
+
+                            <p class="pp-text wow fadeInUp" data-wow-delay=".5s"></p>
+
+                            <a href="#contact" class="pp-theme-btn wow fadeInUp" data-wow-delay=".5s"> <i class="fa-solid fa-arrow-right-long"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -896,73 +1082,31 @@
         </div>
     </section>
 
-   
 
-    
 
-    <!-- Pp-cta Section Start -->
-    <section class="pp-cta-section section-padding fix theme-bg">
-        <div class="top-shape">
-            <img src="assets/img/home-1/cta/bg.png" alt="img">
-        </div>
-        <div class="container">
-            <div class="pp-cta-wrapper">
-                <div class="row g-4 align-items-center">
-                    <div class="col-lg-6">
-                        <div class="pp-cta-image">
-                            <img src="assets/img/home-1/cta/cta-1.jpg" alt="img" class="wow img-custom-anim-top"
-                                data-wow-duration="1.3s" data-wow-delay="0.3s">
-                            <div class="pp-cta-image-2">
-                                <img src="assets/img/home-1/cta/cta-2.jpg" alt="img" class="wow img-custom-anim-right"
-                                    data-wow-duration="1.3s" data-wow-delay="0.3s">
-                            </div>
-                            <div class="pp-shape float-bob-y">
-                                <img src="assets/img/home-1/cta/shape-1.jpg" alt="img">
-                            </div>
-                            <div class="pp-shape-2 float-bob-y">
-                                <img src="assets/img/home-1/cta/shape-2.jpg" alt="img">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="pp-cta-content">
-                            <h2 class="wow fadeInUp" data-wow-delay=".3s">
-                                Want Marketing That Works for Your App?
-                            </h2>
-                            <p class="wow fadeInUp" data-wow-delay=".5s">
-                                In vestibulum dui a odio pharetra, nec accumsan sapien consectetur. Pellentesque magna
-                                risus, volutpat a vestibulum ut, tempus et quam.
-                            </p>
-                            <div class="pp-cta-button">
-                                <a href="contact.html" class="pp-theme-btn wow fadeInUp" data-wow-delay=".3s">Get
-                                    Started <i class="fa-solid fa-arrow-right-long"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     <!-- Pp Footer Section Start -->
-    <footer class="pp-footer-section section-bg-2">
+    <!-- ✅ เพิ่ม id="contact" -->
+    <footer id="contact" class="pp-footer-section section-bg-2">
         <div class="top-shape">
-            <img src="assets/img/home-1/bg-shape.png" alt="img">
+            <img src="assets/img/home-1/hero/shot_bg_3.png" alt="img">
         </div>
         <div class="container">
-            <div class="pp-footer-widget-wrapper">
-                <div class="row justify-content-between">
-                    <div class="col-xl-5 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s">
+            <div class="pp-footer-widget-wrapper" style="width: 1580px;">
+
+                <div class="row">
+                    <div class="col-xl-4 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s">
                         <div class="pp-footer-widget-items">
                             <div class="pp-widget-head">
                                 <a href="index.html" class="pp-footer-logo">
-                                    <img src="assets/img/logo/white-logo.svg" alt="img">
+                                    <img src="assets/img/logo/aileen-light-logo.png" style="width: 15%;" alt="img">
                                 </a>
                             </div>
                             <div class="pp-footer-content">
                                 <p>
-                                    Aliquam finibus odio sollicitudin vestibulum tincidunt. Nullam vel fringilla
-                                    elit.auctor ut,cursus ut mauris.
+                                    Smart solutions. Trusted expertise, <br>
+                                    Built to support your business growth.
                                 </p>
                                 <div class="social-icon d-flex align-items-center">
                                     <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -973,7 +1117,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-2 col-lg-4 col-md-6 col-sm-6 ps-lg-5 wow fadeInUp" data-wow-delay=".4s">
+                    <!-- <div class="col-xl-2 col-lg-4 col-md-6 col-sm-6 ps-lg-5 wow fadeInUp" data-wow-delay=".4s">
                         <div class="pp-footer-widget-items">
                             <div class="pp-widget-head">
                                 <h3>Quick Links</h3>
@@ -1006,8 +1150,8 @@
                                 </li>
                             </ul>
                         </div>
-                    </div>
-                    <div class="col-xl-2 col-lg-4 col-md-6 col-sm-6 ps-lg-5 wow fadeInUp" data-wow-delay=".6s">
+                    </div> -->
+                    <!-- <div class="col-xl-2 col-lg-4 col-md-6 col-sm-6 ps-lg-5 wow fadeInUp" data-wow-delay=".6s">
                         <div class="pp-footer-widget-items">
                             <div class="pp-widget-head">
                                 <h3>Company</h3>
@@ -1040,8 +1184,8 @@
                                 </li>
                             </ul>
                         </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 ps-lg-2 wow fadeInUp" data-wow-delay=".8s">
+                    </div> -->
+                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 ps-lg-2 ms-auto wow fadeInUp" data-wow-delay=".8s">
                         <div class="pp-footer-widget-items">
                             <div class="pp-widget-head">
                                 <h3>Ready to Get Started?</h3>
@@ -1053,11 +1197,9 @@
                                 <div class="pp-content">
                                     <h6>
                                         <a href="mailto:contact.tech@gmail.com">
-                                            contact.tech@gmail.com
+                                            info@aileensolutions.com
                                         </a> <br>
-                                        <a href="mailto:info@neotech.com">
-                                            info@neotech.com
-                                        </a>
+
                                     </h6>
                                 </div>
                             </div>
@@ -1067,8 +1209,8 @@
                                 </div>
                                 <div class="pp-content">
                                     <h6>
-                                        <a href="tel:+88012365478900">+880 123 654 789 00</a> <br>
-                                        <a href="tel:+001652069800">+001 6520 698 00</a>
+                                        <a href="tel:+88012365478900">062-896-5159</a> <br>
+
                                     </h6>
                                 </div>
                             </div>
@@ -1080,14 +1222,15 @@
         <div class="footer-bottom3">
             <div class="container">
                 <div class="pp-footer-bottom-wrapper">
-                    <p class="wow fadeInUp" data-wow-delay=".3s">Copyright© <b>Pixel-plus</b></p>
+                    <p class="wow fadeInUp" data-wow-delay=".3s">Copyright © <b>2025 Aileen Solutions. All rights
+                            reserved.</b></p>
                     <ul class="pp-footer-list wow fadeInUp" data-wow-delay=".5s">
-                        <li>
+                        <!-- <li>
                             <a href="contact.html">Terms & Conditions</a>
                         </li>
                         <li>
                             <a href="contact.html">Privacy Policy</a>
-                        </li>
+                        </li> -->
                         <li>
                             <a href="contact.html">Contact Us</a>
                         </li>
@@ -1119,6 +1262,52 @@
     <script src="assets/js/wow.min.js"></script>
     <!--<< Main.js >>-->
     <script src="assets/js/main.js"></script>
+
+    <!-- ✅ เพิ่ม: คลิก #hash แล้วเลื่อนแบบชดเชยความสูง header sticky + ปิดเมนูมือถือ -->
+    <script>
+        (function () {
+            const header = document.getElementById('header-sticky');
+
+            function headerH() {
+                if (!header) return 0;
+                return header.getBoundingClientRect().height || 0;
+            }
+
+            function closeMeanMenuIfOpen() {
+                // meanmenu มักสร้างปุ่ม .meanmenu-reveal สำหรับเปิด/ปิด
+                const reveal = document.querySelector('.meanmenu-reveal');
+                const meanBar = document.querySelector('.mean-bar');
+                if (!reveal || !meanBar) return;
+
+                // ถ้าเมนูเปิดอยู่ มักมี class "meanclose"
+                if (reveal.classList.contains('meanclose')) {
+                    reveal.click();
+                }
+            }
+
+            document.addEventListener('click', function (e) {
+                const a = e.target.closest('a[href^="#"]');
+                if (!a) return;
+
+                const href = a.getAttribute('href');
+                if (!href || href === '#') return;
+
+                const target = document.querySelector(href);
+                if (!target) return;
+
+                e.preventDefault();
+
+                const top = target.getBoundingClientRect().top + window.pageYOffset - (headerH() + 10);
+
+                window.scrollTo({
+                    top: top,
+                    behavior: 'smooth'
+                });
+
+                closeMeanMenuIfOpen();
+            });
+        })();
+    </script>
 </body>
 
 </html>
