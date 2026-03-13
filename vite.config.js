@@ -3,5 +3,5 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/aileen-website/',
+  base: '/', // แก้จาก '/aileen-website/' เป็น '/'
 })
