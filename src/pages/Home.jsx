@@ -9,39 +9,7 @@ import SectionContactFooter from "../components/SectionContactFooter";
 // import CustomersMarquee from "../components/CustomersMarquee";
 import SectionLeaderVision from "../components/Sectionleadervision";
 import SectionTeam from "../components/SectionTeam";
-
-/* ─────────────────────────────────────────────────────────────
-   VIDEO_ID — YouTube video ID
-   ใช้ loop=1 + playlist=VIDEO_ID เพื่อให้ YouTube loop อัตโนมัติ
-   และใช้ 2 iframe crossfade เพื่อซ่อนช่วงสีดำตอน restart
-───────────────────────────────────────────────────────────── */
-const VIDEO_ID = "DriseDvlZH8";
-
-const iframeStyle = {
-  position: "absolute",
-  width: "max(100vw, 177.78vh)",
-  height: "max(56.25vw, 100vh)",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  pointerEvents: "none",
-  border: "none",
-};
-
-/* Single iframe — ใช้ loop=1&playlist= ให้ YouTube จัดการเอง
-   ไม่มี black flash เพราะ YouTube จะ preload ตัวเองก่อน restart */
-function YoutubeBg() {
-  const src = `https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&mute=1&controls=0&loop=1&playlist=${VIDEO_ID}&playsinline=1&rel=0&modestbranding=1&iv_load_policy=3&fs=0&disablekb=1`;
-  return (
-    <iframe
-      src={src}
-      title="bg-video"
-      allow="autoplay; encrypted-media"
-      allowFullScreen
-      style={iframeStyle}
-    />
-  );
-}
+import AnimatedWaveBg from "../components/AnimatedWaveBg";
 
 /* ─── slides ─── */
 const slides = [
@@ -72,15 +40,15 @@ const slides = [
 ];
 
 export default function Home() {
-  const [isLoaded, setIsLoaded]         = useState(false);
-  const [isFading, setIsFading]         = useState(false);
-  const [introPhase, setIntroPhase]     = useState("center");
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isAnimating, setIsAnimating]   = useState(false);
-  const [slideDir, setSlideDir]         = useState("up");
+  const [isLoaded, setIsLoaded]               = useState(false);
+  const [isFading, setIsFading]               = useState(false);
+  const [introPhase, setIntroPhase]           = useState("center");
+  const [currentSlide, setCurrentSlide]       = useState(0);
+  const [isAnimating, setIsAnimating]         = useState(false);
+  const [slideDir, setSlideDir]               = useState("up");
   const [carouselHovered, setCarouselHovered] = useState(false);
-  const [navVisible, setNavVisible]     = useState(false);
-  const autoRef    = useRef(null);
+  const [navVisible, setNavVisible]           = useState(false);
+  const autoRef     = useRef(null);
   const lastScrollY = useRef(0);
 
   useEffect(() => {
@@ -163,11 +131,11 @@ export default function Home() {
       </div>
 
       {/* HERO */}
-      <section className="relative w-full min-h-screen overflow-hidden bg-black">
+      <section className="relative w-full min-h-screen overflow-hidden bg-[#04101e]">
 
-        {/* ── YouTube bg with native loop ── */}
-        <div className="absolute inset-0 z-0 overflow-hidden">
-          <YoutubeBg />
+        {/* ── Canvas animated wave background ── */}
+        <div className="absolute inset-0 z-0">
+          <AnimatedWaveBg />
         </div>
 
         <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/30 via-black/20 to-black/25" />
@@ -272,7 +240,7 @@ export default function Home() {
 
       <main className="mx-auto max-w-6xl px-6"></main>
       {/* <section id="customers" className="py-0 bg-white"><CustomersMarquee /></section> */}
-      <section className="py-0 "><SectionDataOrbit /></section>
+      <section className="py-0"><SectionDataOrbit /></section>
       <section id="service" className="py-0 bg-slate-50"><SectionServiceAndSolutions /></section>
       <section id="leaderVision" className="py-0 bg-white"><SectionLeaderVision /></section>
       {/* <section id="strengths" className="py-0"><SectionStrengths /></section> */}
@@ -280,4 +248,4 @@ export default function Home() {
       <section id="contact" className=""><SectionContactFooter /></section>
     </div>
   );
-} 
+}
