@@ -11,36 +11,26 @@ import SectionContactFooter from "../components/SectionContactFooter";
 import SectionLeaderVision from "../components/Sectionleadervision";
 import SectionTeam from "../components/SectionTeam";
 
-/* ─────────────────────────────────────────────────────────────
-   VIDEO_ID — YouTube video ID
-   ใช้ loop=1 + playlist=VIDEO_ID เพื่อให้ YouTube loop อัตโนมัติ
-   และใช้ 2 iframe crossfade เพื่อซ่อนช่วงสีดำตอน restart
-───────────────────────────────────────────────────────────── */
-const VIDEO_ID = "DriseDvlZH8";
-
-const iframeStyle = {
-  position: "absolute",
-  width: "max(100vw, 177.78vh)",
-  height: "max(56.25vw, 100vh)",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  pointerEvents: "none",
-  border: "none",
-};
-
-/* Single iframe — ใช้ loop=1&playlist= ให้ YouTube จัดการเอง
-   ไม่มี black flash เพราะ YouTube จะ preload ตัวเองก่อน restart */
-function YoutubeBg() {
-  const src = `https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&mute=1&controls=0&loop=1&playlist=${VIDEO_ID}&playsinline=1&rel=0&modestbranding=1&iv_load_policy=3&fs=0&disablekb=1`;
+function VideoBg() {
   return (
-    <iframe
-      src={src}
-      title="bg-video"
-      allow="autoplay; encrypted-media"
-      allowFullScreen
-      style={iframeStyle}
-    />
+    <video
+      autoPlay
+      muted
+      loop
+      playsInline
+      style={{
+        position: "absolute",
+        width: "max(100vw, 177.78vh)",
+        height: "max(56.25vw, 100vh)",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        objectFit: "cover",
+        pointerEvents: "none",
+      }}
+    >
+      <source src="/video/main-bg.mp4" type="video/mp4" />
+    </video>
   );
 }
 
@@ -167,9 +157,9 @@ export default function Home() {
       {/* HERO */}
       <section className="relative w-full min-h-screen overflow-hidden bg-black">
 
-        {/* ── YouTube bg with native loop ── */}
+        {/* ── Local video background ── */}
         <div className="absolute inset-0 z-0 overflow-hidden">
-          <YoutubeBg />
+          <VideoBg />
         </div>
 
         <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/30 via-black/20 to-black/25" />
