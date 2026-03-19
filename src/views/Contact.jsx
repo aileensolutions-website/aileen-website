@@ -116,7 +116,7 @@ export default function Contact() {
 
               <div className="mt-5">
                 <label className="mb-2 block text-sm text-white/80">
-                  หัวข้อเรื่องที่ติดต่อเ
+                  หัวข้อเรื่องที่ติดต่อ
                 </label>
                 <input
                   name="subject"
