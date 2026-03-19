@@ -1,16 +1,17 @@
+"use client";
 import { useEffect, useMemo, useRef, useState } from "react";
 
-import agc from "../assets/img/home/customers/AGC.png";
-import bangchak from "../assets/img/home/customers/bangchak.svg";
-import egat from "../assets/img/home/customers/egat.png";
-import gc from "../assets/img/home/customers/GC.webp";
-import ggc from "../assets/img/home/customers/ggc.png";
-import hmc from "../assets/img/home/customers/HMC.png";
-import logoPTT3 from "../assets/img/home/customers/logo_PTT_3.png";
-import npc from "../assets/img/home/customers/npc.png";
-import pttAsahi from "../assets/img/home/customers/ptt-asahi.png";
-import pttDigital from "../assets/img/home/customers/ptt-digital.png";
-import tex from "../assets/img/home/customers/Tex.png";
+const agc = "/img/home/customers/AGC.png";
+const bangchak = "/img/home/customers/bangchak.svg";
+const egat = "/img/home/customers/egat.png";
+const gc = "/img/home/customers/GC.webp";
+const ggc = "/img/home/customers/ggc.png";
+const hmc = "/img/home/customers/HMC.png";
+const logoPTT3 = "/img/home/customers/logo_PTT_3.png";
+const npc = "/img/home/customers/npc.png";
+const pttAsahi = "/img/home/customers/ptt-asahi.png";
+const pttDigital = "/img/home/customers/ptt-digital.png";
+const tex = "/img/home/customers/Tex.png";
 
 /* ── useInView hook ── */
 function useInView(threshold = 0.1) {
@@ -27,58 +28,6 @@ function useInView(threshold = 0.1) {
     return () => obs.disconnect();
   }, []);
   return [ref, inView];
-}
-
-/* ── inject CSS once ── */
-const CSS_ID = "cust-marquee-css";
-function injectCSS() {
-  if (document.getElementById(CSS_ID)) return;
-  const s = document.createElement("style");
-  s.id = CSS_ID;
-  s.textContent = `
-    /* pill + heading reveal */
-    @keyframes cmUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: none; }
-    }
-    .cm-rv { opacity: 0; }
-    .cm-rv.on { animation: cmUp .65s cubic-bezier(.22,1,.36,1) forwards; }
-
-    /* marquee wrapper reveal — scale + fade */
-    @keyframes cmScale {
-      from { opacity: 0; transform: scale(.97) translateY(16px); }
-      to   { opacity: 1; transform: none; }
-    }
-    .cm-wrap-rv { opacity: 0; }
-    .cm-wrap-rv.on { animation: cmScale .8s cubic-bezier(.22,1,.36,1) .32s forwards; }
-
-    /* counting line beneath heading */
-    @keyframes cmLine {
-      from { transform: scaleX(0); }
-      to   { transform: scaleX(1); }
-    }
-    .cm-line {
-      display: block;
-      height: 2px;
-      width: 48px;
-      margin: 10px auto 0;
-      border-radius: 2px;
-      background: linear-gradient(90deg, #0499a5, #2d65a2);
-      transform: scaleX(0);
-      transform-origin: left;
-    }
-    .cm-line.on { animation: cmLine .6s cubic-bezier(.22,1,.36,1) .22s forwards; }
-
-    /* logo item hover lift */
-    .cm-logo-item {
-      transition: transform .25s cubic-bezier(.22,1,.36,1), filter .25s;
-    }
-    .cm-logo-item:hover {
-      transform: translateY(-4px) scale(1.08);
-      filter: drop-shadow(0 8px 16px rgba(37,99,235,.15));
-    }
-  `;
-  document.head.appendChild(s);
 }
 
 export default function CustomersMarquee() {
@@ -110,8 +59,6 @@ export default function CustomersMarquee() {
 
   const [paused,     setPaused]     = useState(false);
   const [isDragging, setIsDragging] = useState(false);
-
-  useEffect(() => { injectCSS(); }, []);
 
   const normalizePos = (pos, halfWidth) => {
     if (!halfWidth) return 0;

@@ -13,7 +13,7 @@ export default function ContactButton({ href = "/contact", className = "" }) {
     >
       ติดต่อเรา{" "}
       <svg
-        class="w-3.5 text-gray-800 dark:text-white"
+        className="w-3.5 text-gray-800 dark:text-white"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -21,9 +21,9 @@ export default function ContactButton({ href = "/contact", className = "" }) {
       >
         <path
           stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
           d="M1 5h12m0 0L9 1m4 4L9 9"
         />
       </svg>

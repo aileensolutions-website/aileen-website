@@ -1,6 +1,7 @@
+"use client";
 import { useEffect, useState } from "react";
 import ContactButton from "./ContactButton";
-import logo from "../assets/img/logo/aileen-logo.png";
+const logo = "/img/logo/aileen-logo.png";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);

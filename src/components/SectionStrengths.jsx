@@ -1,55 +1,13 @@
+"use client";
 import React, { useEffect, useMemo, useRef, useState, useCallback } from "react";
-import cubeImg from "../assets/img/home/cube.png";
-import stBg from "../assets/img/home/st-bg.png";
-import consultIco    from "../assets/img/home/icon/consult.svg";
-import experienceIco from "../assets/img/home/icon/experience.svg";
-import heartIco      from "../assets/img/home/icon/heart.svg";
-import platformIco   from "../assets/img/home/icon/platform.svg";
-import rapidlyIco    from "../assets/img/home/icon/rapidly.svg";
-import simplifyIco   from "../assets/img/home/icon/simplify.svg";
-
-const STYLE_ID = "st-v5-css";
-function injectCSS() {
-  if (document.getElementById(STYLE_ID)) return;
-  const s = document.createElement("style");
-  s.id = STYLE_ID;
-  s.textContent = `
-    @keyframes stFloat{0%,100%{transform:translateY(-6px)}50%{transform:translateY(-18px)}}
-    @keyframes stGlow{0%,100%{filter:drop-shadow(0 0 20px rgba(56,224,208,.25)) drop-shadow(0 0 50px rgba(56,224,208,.10))}50%{filter:drop-shadow(0 0 35px rgba(56,224,208,.45)) drop-shadow(0 0 70px rgba(56,224,208,.22))}}
-    .st-cube-anim{animation:stFloat 4.5s ease-in-out infinite,stGlow 3.5s ease-in-out infinite}
-    @keyframes stPart{0%{transform:translateY(0) scale(1);opacity:0}12%{opacity:.8}80%{opacity:.5}100%{transform:translateY(-360px) scale(.2);opacity:0}}
-    .st-p{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(56,224,208,.75),transparent 70%);pointer-events:none;animation:stPart var(--d) ease-in-out var(--dl) infinite}
-    @keyframes stRing{0%{transform:scale(1);opacity:.5}100%{transform:scale(2.2);opacity:0}}
-    .st-ring::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:1.5px solid rgba(56,224,208,.4);animation:stRing 2.8s ease-out infinite}
-    @keyframes stCdL{from{opacity:0;transform:translateX(-45px) scale(.96)}to{opacity:1;transform:translateX(0) scale(1)}}
-    @keyframes stCdR{from{opacity:0;transform:translateX(45px) scale(.96)}to{opacity:1;transform:translateX(0) scale(1)}}
-    .st-cl{animation:stCdL .65s cubic-bezier(.22,1,.36,1) forwards}
-    .st-cr{animation:stCdR .65s cubic-bezier(.22,1,.36,1) forwards}
-    @keyframes stBdg{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
-    .st-bdg{animation:stBdg .4s ease forwards}
-    .st-ec{position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.08);border-radius:14px;background:rgba(255,255,255,.04);backdrop-filter:blur(10px);padding:20px 24px;display:flex;align-items:flex-start;gap:16px;transition:transform .3s,box-shadow .3s,border-color .3s;flex:1;min-height:120px}
-    .st-ec::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(56,224,208,.05),transparent);transition:left .55s}
-    .st-ec:hover{transform:translateY(-2px);box-shadow:0 6px 28px rgba(0,0,0,.25),0 0 16px rgba(56,224,208,.06);border-color:rgba(56,224,208,.2)}
-    .st-ec:hover::before{left:100%}
-    .st-ec:hover .st-ico{transform:rotateY(180deg)}
-    .st-ico{flex-shrink:0;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);transition:transform .5s;transform-style:preserve-3d}
-    .st-ip{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;border-radius:9999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);backdrop-filter:blur(6px);color:rgba(255,255,255,.7);font-size:.82rem;font-weight:500;cursor:pointer;white-space:nowrap;transition:all .3s}
-    .st-ip:hover{background:rgba(255,255,255,.1);border-color:rgba(56,224,208,.25);color:rgba(255,255,255,.9)}
-    .st-ip .a{font-size:1rem;line-height:1;transition:transform .3s}
-    .st-ip:hover .af{transform:translateX(2px)}.st-ip:hover .ab{transform:translateX(-2px)}
-    .st-mTabs{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 10px 30px rgba(0,0,0,.18)}
-    .st-mTab{border-radius:9999px;padding:10px 16px;font-size:.78rem;font-weight:700;letter-spacing:.06em;transition:all .25s ease;color:rgba(255,255,255,.72)}
-    .st-mTab:hover{color:rgba(255,255,255,.9)}
-    .st-mTab.is-active{color:white;background:linear-gradient(135deg,rgba(56,224,208,.18),rgba(14,165,233,.14));border:1px solid rgba(56,224,208,.22);box-shadow:0 8px 22px rgba(56,224,208,.08)}
-    .st-mCue{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
-    @keyframes stMuUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-    .st-mu{opacity:0}.st-mu.on{animation:stMuUp .6s cubic-bezier(.22,1,.36,1) forwards}
-    .st-mCard{position:relative;border-radius:18px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);overflow:hidden}
-    .st-mCard::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(56,224,208,.10),rgba(14,165,233,.06),transparent 60%);pointer-events:none;opacity:.9}
-    @media(max-width:768px){.st-mobileTabsWrap{position:relative;z-index:20}.st-mobileCubeWrap{position:relative;z-index:10}}
-  `;
-  document.head.appendChild(s);
-}
+const cubeImg = "/img/home/cube.png";
+const stBg = "/img/home/st-bg.png";
+const consultIco    = "/img/home/icon/consult.svg";
+const experienceIco = "/img/home/icon/experience.svg";
+const heartIco      = "/img/home/icon/heart.svg";
+const platformIco   = "/img/home/icon/platform.svg";
+const rapidlyIco    = "/img/home/icon/rapidly.svg";
+const simplifyIco   = "/img/home/icon/simplify.svg";
 
 function Particles({ n = 16 }) {
   const d = useMemo(() => Array.from({ length: n }, () => ({
@@ -102,8 +60,6 @@ export default function SectionStrengths() {
   const bgRef  = useRef(null);
   const tgt = useRef({ x:50, y:50 });
   const cur = useRef({ x:50, y:50 });
-
-  useEffect(() => { injectCSS(); }, []);
 
   useEffect(() => {
     const el = secRef.current; if (!el) return;
