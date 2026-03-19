@@ -27,7 +27,7 @@ export default function Navbar() {
       <nav className={`${navBg} transition-all duration-300`}>
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 md:px-8">
           {/* Logo */}
-          <a href="#home" className="flex items-center gap-2">
+          <a href="/" className="flex items-center gap-2">
             <img
               src={scrolled ? logo : logo}
               alt="AILEEN logo"
@@ -41,27 +41,27 @@ export default function Navbar() {
           {/* Desktop menu */}
           <ul className="hidden items-center gap-8 md:flex text-sm  tracking-wide transition-colors">
   <li>
-    <a className={` ${menuText} ${menuHover}`} href="#home">
+    <a className={` ${menuText} ${menuHover}`} href="/">
       หน้าแรก
     </a>
   </li>
   <li>
-    <a className={`${menuText} ${menuHover}`} href="#about">
+    <a className={`${menuText} ${menuHover}`} href="/about">
       เกี่ยวกับเรา
     </a>
   </li>
   <li>
-    <a className={` ${menuText} ${menuHover}`} href="#service">
+    <a className={` ${menuText} ${menuHover}`} href="/service">
       บริการของเรา
     </a>
   </li>
   <li>
-    <a className={` ${menuText} ${menuHover}`} href="#customers">
+    <a className={` ${menuText} ${menuHover}`} href="/customers">
     ลูกค้าของเรา
     </a>
   </li>
   <li>
-    <a className={` ${menuText} ${menuHover}`} href="#news">
+    <a className={` ${menuText} ${menuHover}`} href="/news">
         ข่าวสารและกิจกรรม
     </a>
   </li>
@@ -70,7 +70,7 @@ export default function Navbar() {
 
           {/* Right */}
           <div className="hidden md:block">
-            <ContactButton href="#contact" />
+            <ContactButton href="/contact" />
           </div>
 
           {/* Mobile button */}
@@ -90,34 +90,34 @@ export default function Navbar() {
         {open && (
           <div className="md:hidden border-t border-slate-200 bg-white">
             <div className="mx-auto max-w-7xl px-4 py-4 space-y-3">
-              <a className="block font-semibold text-slate-900" href="#home">
+              <a className="block font-semibold text-slate-900" href="/">
                 HOME
               </a>
-              <a className="block font-semibold text-slate-900" href="#about">
+              <a className="block font-semibold text-slate-900" href="/about">
                 ABOUT US
               </a>
               <a
                 className="block font-semibold text-slate-900"
-                href="#services"
+                href="/service"
               >
                 SERVICES
               </a>
               <a
                 className="block font-semibold text-slate-900"
-                href="#customers"
+                href="/customers"
               >
                 CUSTOMERS
               </a>
               <a
                 className="block font-semibold text-slate-900"
-                href="#news"
+                href="/news"
               >
                 NEWS
               </a>
 
               <div className="pt-2">
                 <ContactButton
-                  href="#contact"
+                  href="/contact"
                   className="w-full justify-center"
                 />
               </div>
