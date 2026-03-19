@@ -1,54 +1,18 @@
+"use client";
 import { useEffect, useMemo, useRef, useState } from "react";
 
-import agc from "../assets/img/home/customers/AGC.png";
-import bangchak from "../assets/img/home/customers/bangchak.svg";
-import egat from "../assets/img/home/customers/egat.png";
-import gc from "../assets/img/home/customers/GC.webp";
-import ggc from "../assets/img/home/customers/ggc.png";
-import hmc from "../assets/img/home/customers/HMC.png";
-import logoPTT3 from "../assets/img/home/customers/logo_PTT_3.png";
-import npc from "../assets/img/home/customers/npc.png";
-import pttAsahi from "../assets/img/home/customers/ptt-asahi.png";
-import pttDigital from "../assets/img/home/customers/ptt-digital.png";
-import tex from "../assets/img/home/customers/Tex.png";
+const agc = "/img/home/customers/AGC.png";
+const bangchak = "/img/home/customers/bangchak.svg";
+const egat = "/img/home/customers/egat.png";
+const gc = "/img/home/customers/GC.webp";
+const ggc = "/img/home/customers/ggc.png";
+const hmc = "/img/home/customers/HMC.png";
+const logoPTT3 = "/img/home/customers/logo_PTT_3.png";
+const npc = "/img/home/customers/npc.png";
+const pttAsahi = "/img/home/customers/ptt-asahi.png";
+const pttDigital = "/img/home/customers/ptt-digital.png";
+const tex = "/img/home/customers/Tex.png";
 
-/* ── inject CSS once ── */
-const CSS_ID = "orbit-scroll-css";
-function injectScrollCSS() {
-  if (document.getElementById(CSS_ID)) return;
-  const s = document.createElement("style");
-  s.id = CSS_ID;
-  s.textContent = `
-@keyframes orbFadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-@keyframes orbScale{from{opacity:0;transform:scale(.4);filter:blur(6px)}to{opacity:1;transform:scale(1);filter:blur(0)}}
-@keyframes orbSlideR{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
-@keyframes orbRingGrow{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:scale(1)}}
-.orb-rv{opacity:0}.orb-rv.on{animation:orbFadeUp .7s cubic-bezier(.22,1,.36,1) forwards}
-.orb-sc{opacity:0}.orb-sc.on{animation:orbScale .7s cubic-bezier(.22,1,.36,1) forwards}
-.orb-sr{opacity:0}.orb-sr.on{animation:orbSlideR .7s cubic-bezier(.22,1,.36,1) forwards}
-.orb-rg{opacity:0}.orb-rg.on{animation:orbRingGrow .6s cubic-bezier(.22,1,.36,1) forwards}
-
-/* marquee reveal */
-@keyframes cmUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
-@keyframes cmScale{from{opacity:0;transform:scale(.97) translateY(16px)}to{opacity:1;transform:none}}
-@keyframes cmLine{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-.cm-rv{opacity:0}.cm-rv.on{animation:cmUp .65s cubic-bezier(.22,1,.36,1) forwards}
-.cm-wrap-rv{opacity:0}.cm-wrap-rv.on{animation:cmScale .8s cubic-bezier(.22,1,.36,1) .32s forwards}
-.cm-line{display:block;height:2px;width:48px;margin:10px auto 0;border-radius:2px;background:linear-gradient(90deg,#0499a5,#2d65a2);transform:scaleX(0);transform-origin:left}
-.cm-line.on{animation:cmLine .6s cubic-bezier(.22,1,.36,1) .22s forwards}
-
-/* divider */
-@keyframes cmDivLine{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-.cm-div{display:flex;align-items:center;gap:16px;margin:60px 0 0}
-.cm-div-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(0,0,0,.08),transparent);transform:scaleX(0);transform-origin:center}
-.cm-div-line.on{animation:cmDivLine .7s cubic-bezier(.22,1,.36,1) .1s forwards}
-.cm-div-dot{width:6px;height:6px;border-radius:50%;background:linear-gradient(135deg,#0499a5,#2d65a2);flex-shrink:0}
-
-.cm-logo-item{transition:transform .25s cubic-bezier(.22,1,.36,1),filter .25s}
-.cm-logo-item:hover{transform:translateY(-4px) scale(1.08);filter:drop-shadow(0 8px 16px rgba(37,99,235,.15))}
-`;
-  document.head.appendChild(s);
-}
 
 /* ── OrbitChip ── */
 const OrbitChip = ({ style, title, tooltip, tone = "blue", isActive = false, inView = false, revealDelay = 0 }) => {
@@ -96,8 +60,6 @@ export default function SectionDataOrbit() {
 
   const [inView, setInView] = useState(false);
   const secRef = useRef(null);
-
-  useEffect(() => { injectScrollCSS(); }, []);
 
   useEffect(() => {
     const el = secRef.current;

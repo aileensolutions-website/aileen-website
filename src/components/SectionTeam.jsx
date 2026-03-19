@@ -1,22 +1,23 @@
+"use client";
 import { useEffect, useRef, useState } from "react";
-import member1  from "../assets/img/profile/member1.png";
-import member2  from "../assets/img/profile/member2.png";
-import member3  from "../assets/img/profile/member3.png";
-import member4  from "../assets/img/profile/member4.png";
-import member5  from "../assets/img/profile/member5.png";
-import member6  from "../assets/img/profile/member6.png";
-import member7  from "../assets/img/profile/member7.png";
-import member8  from "../assets/img/profile/member8.png";
-import member9  from "../assets/img/profile/member9.png";
-import member10 from "../assets/img/profile/member10.png";
-import member11 from "../assets/img/profile/member11.png";
-import member12 from "../assets/img/profile/member12.png";
-import member13 from "../assets/img/profile/member13.png";
-import member14 from "../assets/img/profile/member14.png";
-import member15 from "../assets/img/profile/member15.png";
-import member16 from "../assets/img/profile/member16.png";
-import member17 from "../assets/img/profile/member17.png";
-import member18 from "../assets/img/profile/member18.png";
+const member1  = "/img/profile/member1.png";
+const member2  = "/img/profile/member2.png";
+const member3  = "/img/profile/member3.png";
+const member4  = "/img/profile/member4.png";
+const member5  = "/img/profile/member5.png";
+const member6  = "/img/profile/member6.png";
+const member7  = "/img/profile/member7.png";
+const member8  = "/img/profile/member8.png";
+const member9  = "/img/profile/member9.png";
+const member10 = "/img/profile/member10.png";
+const member11 = "/img/profile/member11.png";
+const member12 = "/img/profile/member12.png";
+const member13 = "/img/profile/member13.png";
+const member14 = "/img/profile/member14.png";
+const member15 = "/img/profile/member15.png";
+const member16 = "/img/profile/member16.png";
+const member17 = "/img/profile/member17.png";
+const member18 = "/img/profile/member18.png";
 
 const TEAM = [
   { photo: member5,  name: "Surinna.T",    role: "Managing Director",          dept: "sales"   },
@@ -60,142 +61,6 @@ function useInView(threshold = 0.08) {
     return () => obs.disconnect();
   }, []);
   return [ref, inView];
-}
-
-const CSS_ID = "team9css";
-function injectCSS() {
-  if (document.getElementById(CSS_ID)) return;
-  const s = document.createElement("style");
-  s.id = CSS_ID;
-  s.textContent = `
-    .t9 { background:#f8fafc; position:relative; overflow:hidden; }
-    .t9-blob { position:absolute; border-radius:50%; filter:blur(60px); pointer-events:none; z-index:0; }
-    .t9-blob-tl { top:-60px; left:-80px; width:320px; height:320px; background:rgba(167,243,208,.18); }
-    .t9-blob-br { bottom:-60px; right:-80px; width:320px; height:320px; background:rgba(191,219,254,.20); }
-
-    .t9-pill { display:inline-flex; align-items:center; gap:8px; padding:7px 18px; border-radius:9999px; border:1px solid #cbd5e1; background:rgba(255,255,255,.7); font-size:.7rem; font-weight:400; letter-spacing:.18em; text-transform:uppercase; color:#475569; backdrop-filter:blur(8px); }
-    .t9-hdot { width:7px; height:7px; border-radius:50%; background:#06b6d4; box-shadow:0 0 6px rgba(6,182,212,.6); }
-    .t9-h2   { font-size:clamp(1.4rem,4vw,2.1rem); font-weight:800; letter-spacing:-.03em; color:#0f172a; line-height:1.25; margin:14px 0 0; }
-    .t9-grad { background:linear-gradient(90deg,#0499a5,#2d65a2); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-
-    /* ── DESKTOP TABS ── */
-    .t9-ctrl-wrap { display:flex; justify-content:center; align-items:center; margin-top:28px; padding:0 12px; }
-    .t9-tabs { display:inline-flex; gap:4px; padding:5px; background:#fff; border:1px solid #e2e8f0; border-radius:14px; box-shadow:0 1px 6px rgba(15,23,42,.05); }
-    .t9-tab  { display:inline-flex; align-items:center; gap:5px; padding:7px 12px; border-radius:10px; font-size:.72rem; font-weight:600; color:#64748b; border:none; background:none; cursor:pointer; transition:all .2s; white-space:nowrap; }
-    .t9-tab:hover:not(.on) { background:#f1f5f9; color:#1e293b; }
-    .t9-tab.on { color:#fff; background:linear-gradient(135deg,#3b82f6,#10b981); box-shadow:0 3px 12px rgba(59,130,246,.28); }
-    .t9-cnt  { display:inline-flex; align-items:center; justify-content:center; min-width:18px; height:18px; padding:0 5px; border-radius:9999px; font-size:.6rem; font-weight:700; }
-
-    /* ── MOBILE DROPDOWN ── */
-    .t9-dropdown-wrap { display:none; justify-content:center; margin-top:20px; padding:0 16px; }
-    .t9-dropdown { position:relative; width:100%; max-width:320px; }
-    .t9-dropdown-btn {
-      width:100%; display:flex; align-items:center; justify-content:space-between; gap:8px;
-      padding:11px 16px; border-radius:12px; border:1px solid #e2e8f0;
-      background:#fff; box-shadow:0 1px 6px rgba(15,23,42,.06);
-      font-size:.85rem; font-weight:600; color:#1e293b; cursor:pointer;
-      transition:border-color .2s, box-shadow .2s;
-    }
-    .t9-dropdown-btn:hover { border-color:rgba(59,130,246,.4); box-shadow:0 2px 10px rgba(59,130,246,.12); }
-    .t9-dropdown-arr { font-size:.7rem; color:#64748b; transition:transform .25s; }
-    .t9-dropdown-arr.op { transform:rotate(180deg); }
-    .t9-dropdown-list {
-      position:absolute; top:calc(100% + 6px); left:0; right:0;
-      background:#fff; border-radius:12px; border:1px solid #e2e8f0;
-      box-shadow:0 8px 32px rgba(15,23,42,.12); overflow:hidden;
-      max-height:0; opacity:0; pointer-events:none;
-      transition:max-height .3s cubic-bezier(.22,1,.36,1), opacity .2s;
-      z-index:50;
-    }
-    .t9-dropdown-list.op { max-height:280px; opacity:1; pointer-events:auto; }
-    .t9-dropdown-item {
-      display:flex; align-items:center; justify-content:space-between;
-      padding:11px 16px; font-size:.85rem; font-weight:500; color:#475569;
-      cursor:pointer; transition:background .15s; border-bottom:1px solid #f1f5f9;
-    }
-    .t9-dropdown-item:last-child { border-bottom:none; }
-    .t9-dropdown-item:hover { background:#f8fafc; color:#1e293b; }
-    .t9-dropdown-item.act { background:linear-gradient(135deg,rgba(59,130,246,.08),rgba(16,185,129,.06)); color:#1d4ed8; font-weight:700; }
-    .t9-dropdown-badge { display:inline-flex; align-items:center; justify-content:center; min-width:20px; height:20px; padding:0 6px; border-radius:9999px; background:#e2e8f0; color:#64748b; font-size:.62rem; font-weight:700; }
-    .t9-dropdown-item.act .t9-dropdown-badge { background:rgba(59,130,246,.15); color:#1d4ed8; }
-
-    /* ── MARQUEE (all tab) ── */
-    .t9-marquee-wrap { position:relative; overflow:hidden; margin:28px 0 0; padding:8px 0 24px; }
-    .t9-marquee-wrap::before,.t9-marquee-wrap::after { content:''; position:absolute; top:0; bottom:0; width:60px; z-index:2; pointer-events:none; }
-    .t9-marquee-wrap::before { left:0;  background:linear-gradient(to right,#f8fafc,transparent); }
-    .t9-marquee-wrap::after  { right:0; background:linear-gradient(to left,#f8fafc,transparent); }
-
-    .t9-marquee-track { display:flex; width:max-content; animation:t9scroll 50s linear infinite; }
-    /* pause only when a card inside is hovered — controlled via JS class */
-    .t9-marquee-track.paused { animation-play-state:paused; }
-
-    .t9-marquee-list { display:flex; flex-shrink:0; gap:14px; padding:0 7px; }
-    @keyframes t9scroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-
-    /* ── FILTERED TABS: manual scroll ── */
-    .t9-viewport-wrap { position:relative; overflow:hidden; margin:28px 0 0; }
-    .t9-viewport-wrap::before,.t9-viewport-wrap::after { content:''; position:absolute; top:0; bottom:8px; width:60px; z-index:2; pointer-events:none; }
-    .t9-viewport-wrap::before { left:0;  background:linear-gradient(to right,#f8fafc,transparent); }
-    .t9-viewport-wrap::after  { right:0; background:linear-gradient(to left,#f8fafc,transparent); }
-    .t9-track { overflow-x:scroll; overflow-y:visible; -webkit-overflow-scrolling:touch; scrollbar-width:none; padding:8px 0 24px; cursor:grab; }
-    .t9-track.dragging { cursor:grabbing; user-select:none; }
-    .t9-track::-webkit-scrollbar { display:none; }
-    .t9-inner { display:flex; flex-wrap:nowrap; gap:14px; width:max-content; padding:0 60px; }
-
-    /* ── CARD ── */
-    .t9-card { flex:0 0 160px; cursor:default; }
-    .t9-box  { width:100%; height:220px; border-radius:16px; overflow:hidden; background:linear-gradient(160deg,#e2e8f0,#cdd5e0); position:relative; box-shadow:0 2px 10px rgba(15,23,42,.07); transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s; display:flex; align-items:center; justify-content:center; }
-    .t9-card:hover .t9-box { transform:translateY(-6px) scale(1.02); box-shadow:0 16px 36px rgba(59,130,246,.17),0 4px 12px rgba(15,23,42,.07); }
-    .t9-wash { position:absolute; inset:0; background:linear-gradient(150deg,rgba(59,130,246,.12),rgba(16,185,129,.15)); opacity:0; transition:opacity .35s; pointer-events:none; z-index:1; }
-    .t9-card:hover .t9-wash { opacity:1; }
-    .t9-img  { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; position:absolute; inset:0; }
-    .t9-avatar { width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:2rem; font-weight:700; color:#94a3b8; }
-    .t9-meta { padding:8px 2px 0; text-align:center; }
-    .t9-role { font-size:.75rem; font-weight:700; color:#1e293b; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; transition:color .25s; line-height:1.4; }
-    .t9-card:hover .t9-role { background:linear-gradient(90deg,#0499a5,#2d65a2); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-
-    /* ── BOTTOM NAV ── */
-    .t9-bottom-nav { display:flex; align-items:center; justify-content:center; gap:12px; margin-top:4px; padding-bottom:48px; min-height:60px; }
-    .t9-btn { width:40px; height:40px; border-radius:50%; border:1px solid #e2e8f0; background:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 1px 6px rgba(15,23,42,.06); transition:all .22s; color:#64748b; }
-    .t9-btn:hover:not(:disabled) { border-color:rgba(59,130,246,.4); background:#eff6ff; color:#1d4ed8; }
-    .t9-btn:disabled { opacity:.25; pointer-events:none; }
-    .t9-btn svg { width:14px; height:14px; }
-    .t9-dots { display:flex; gap:6px; align-items:center; }
-    .t9-dot-item { width:6px; height:6px; border-radius:50%; background:#cbd5e1; transition:all .3s; }
-    .t9-dot-item.on { width:20px; border-radius:9999px; background:linear-gradient(90deg,#3b82f6,#10b981); }
-
-    /* ── ANIMATIONS ── */
-    @keyframes t9Up   { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:none} }
-    .t9-rv { opacity:0; }
-    .t9-rv.on { animation:t9Up .65s cubic-bezier(.22,1,.36,1) forwards; }
-    @keyframes t9Card { from{opacity:0;transform:translateY(14px) scale(.97)} to{opacity:1;transform:none} }
-    .t9-card { opacity:0; }
-    .t9-card.on { animation:t9Card .5s cubic-bezier(.22,1,.36,1) forwards; }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width:639px) {
-      /* show dropdown, hide desktop tabs */
-      .t9-ctrl-wrap { display:none !important; }
-      .t9-dropdown-wrap { display:flex; }
-
-      /* filtered: grid instead of scroll */
-      .t9-viewport-wrap { overflow:visible; margin:20px 0 0; }
-      .t9-viewport-wrap::before,.t9-viewport-wrap::after { display:none; }
-      .t9-track { overflow:visible; cursor:default; padding:4px 0 16px; }
-      .t9-track.dragging { cursor:default; }
-      .t9-inner { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; width:100%; padding:0 16px; }
-      .t9-card { flex:none; width:100%; }
-      .t9-box  { height:200px; border-radius:14px; }
-      .t9-role { font-size:.72rem; white-space:normal; line-height:1.3; }
-      .t9-bottom-nav { display:none; }
-
-      /* marquee: smaller cards */
-      .t9-marquee-list { gap:10px; }
-      .t9-marquee-list .t9-card { flex:0 0 130px; }
-      .t9-marquee-list .t9-box  { height:170px; }
-    }
-  `;
-  document.head.appendChild(s);
 }
 
 const Icons = {
@@ -281,8 +146,6 @@ export default function SectionTeam() {
   const [activeDot, setActiveDot] = useState(0);
   const [isMobile, setIsMobile]   = useState(false);
   const dragRef = useRef({ dragging:false, startX:0, scrollLeft:0 });
-
-  useEffect(() => { injectCSS(); }, []);
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 640);
