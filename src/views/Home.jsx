@@ -1,6 +1,7 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import Navbar from "../components/Navbar";
+import AnimatedBg from "../components/AnimatedBg";
 const logo = "/img/logo/aileen-logo.png";
 const sloganImg = "/img/home/slogan.png";
 import SectionDataOrbit from "../components/SectionDataOrbit";
@@ -11,54 +12,31 @@ import SectionContactFooter from "../components/SectionContactFooter";
 import SectionLeaderVision from "../components/Sectionleadervision";
 import SectionTeam from "../components/SectionTeam";
 
-function VideoBg() {
-  return (
-    <video
-      autoPlay
-      muted
-      loop
-      playsInline
-      style={{
-        position: "absolute",
-        width: "max(100vw, 177.78vh)",
-        height: "max(56.25vw, 100vh)",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        objectFit: "cover",
-        pointerEvents: "none",
-      }}
-    >
-      <source src="/video/main-bg.mp4" type="video/mp4" />
-    </video>
-  );
-}
-
 /* ─── slides ─── */
 const slides = [
   <p key={0} className="absolute inset-0 flex items-center lg:items-start flex-col justify-center w-full max-w-[38rem] pr-2 text-center lg:text-left leading-[1.15] tracking-[-0.01em]">
-    <span className="text-white/50 text-xl font-normal tracking-wide">ยกระดับการทำงานทั้งองค์กรด้วย</span>
-    <span className="text-white font-bold text-[50px] pt-2"><em className="not-italic">Digital Process</em></span>
-    <span className="text-white font-bold text-[50px] pt-1">& <em className="not-italic">Automation</em></span>
+    <span className="text-white/50 text-xs lg:text-xl font-normal tracking-wide">ยกระดับการทำงานทั้งองค์กรด้วย</span>
+    <span className="text-white font-bold text-2xl lg:text-[50px] pt-1 lg:pt-6"><em className="not-italic">Digital Process</em></span>
+    <span className="text-white font-bold text-2xl lg:text-[50px] pt-0.5 lg:pt-7">& <em className="not-italic">Automation</em></span>
   </p>,
   <p key={1} className="absolute inset-0 flex items-center lg:items-start flex-col justify-center w-full max-w-[38rem] pr-2 text-center lg:text-left leading-[1.2] tracking-[-0.01em]">
-    <span className="text-white/60 text-xl lg:text-xl">เลิกพึ่งเอกสารเปลี่ยนสู่<em className="text-white">แพลตฟอร์ม</em>ที่</span>
-    <span className="text-white font-bold text-5xl lg:text-5xl mt-2">ควบคุมและ</span>
-    <span className="text-white font-bold text-5xl lg:text-5xl mt-2">ตรวจสอบได้จริง</span>
+    <span className="text-white/60 text-xs lg:text-xl">เลิกพึ่งเอกสารเปลี่ยนสู่<em className="text-white">แพลตฟอร์ม</em>ที่</span>
+    <span className="text-white font-bold text-2xl lg:text-5xl mt-1 lg:mt-2">ควบคุมและ</span>
+    <span className="text-white font-bold text-2xl lg:text-5xl mt-1 lg:mt-2">ตรวจสอบได้จริง</span>
   </p>,
   <p key={2} className="absolute inset-0 flex items-center lg:items-start flex-col justify-center w-full max-w-[38rem] pr-2 text-center lg:text-left leading-[1.2] tracking-[-0.01em]">
-    <span className="text-white/50 text-xl font-normal">ยังเสียเวลากับ </span>
-    <span className="text-white font-bold text-7xl lg:text-7xl"><em className="not-italic">งานซ้ำ ๆ</em></span>
-    <span className="text-white/70 text-xl font-normal mt-1">จนไม่มีเวลาสร้าง<strong className="text-white text-2xl font-semibold">คุณค่าใหม่</strong>อยู่หรือไม่?</span>
+    <span className="text-white/50 text-xs lg:text-xl font-normal">ยังเสียเวลากับ </span>
+    <span className="text-white font-bold text-4xl lg:text-7xl"><em className="not-italic">งานซ้ำ ๆ</em></span>
+    <span className="text-white/70 text-xs lg:text-xl font-normal mt-1">จนไม่มีเวลาสร้าง<strong className="text-white text-sm lg:text-2xl font-semibold">คุณค่าใหม่</strong>อยู่หรือไม่?</span>
   </p>,
   <p key={3} className="absolute inset-0 flex items-center lg:items-start flex-col justify-center w-full max-w-[38rem] pr-2 text-center lg:text-left leading-[1.2] tracking-[-0.01em]">
-    <span className="text-white/60 text-xl lg:text-xl">AI ที่ดีเริ่มจากข้อมูลที่ดี</span>
-    <span className="text-white text-5xl mt-1 font-bold">องค์กรคุณพร้อมสำหรับ AI แล้วหรือยัง ?</span>
+    <span className="text-white/60 text-xs lg:text-xl">AI ที่ดีเริ่มจากข้อมูลที่ดี</span>
+    <span className="text-white text-xl lg:text-5xl mt-1 font-bold">องค์กรคุณพร้อมสำหรับ AI แล้วหรือยัง ?</span>
   </p>,
   <p key={4} className="absolute inset-0 flex items-center lg:items-start flex-col justify-center w-full max-w-[38rem] pr-2 text-center lg:text-left leading-[1.2] tracking-[-0.01em]">
-    <span className="text-white/50 text-xl font-normal">เมื่อทุก Process</span>
-    <span className="text-white font-bold text-4xl lg:text-5xl pt-2"><em className="not-italic">มองเห็น</em>และ<em className="not-italic">พัฒนา</em>ได้จริง</span>
-    <span className="text-white/50 text-xl mt-1 pt-2">องค์กรจะเปลี่ยนไป<strong className="text-white text-2xl font-bold">แค่ไหน?</strong></span>
+    <span className="text-white/50 text-xs lg:text-xl font-normal">เมื่อทุก Process</span>
+    <span className="text-white font-bold text-2xl lg:text-5xl pt-1 lg:pt-2"><em className="not-italic">มองเห็น</em>และ<em className="not-italic">พัฒนา</em>ได้จริง</span>
+    <span className="text-white/50 text-xs lg:text-xl mt-1 pt-1 lg:pt-2">องค์กรจะเปลี่ยนไป<strong className="text-white text-sm lg:text-2xl font-bold">แค่ไหน?</strong></span>
   </p>,
 ];
 
@@ -159,26 +137,27 @@ export default function Home() {
 
         {/* ── Local video background ── */}
         <div className="absolute inset-0 z-0 overflow-hidden">
-          <VideoBg />
+          <AnimatedBg />
         </div>
 
         <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/30 via-black/20 to-black/25" />
 
-        <div className="relative z-10 flex min-h-screen flex-col items-center px-6 pb-10"
+        <div className="relative z-10 flex min-h-screen flex-col items-center px-6 "
           style={{ opacity: isLoaded ? 1 : 0, transition: "opacity 0.8s ease 0.1s" }}>
           <div className="absolute inset-0 z-[1] bg-black/5" />
 
-          <div className="relative z-10 flex min-h-screen flex-col items-center px-6 pt-20 pb-10"
+          <div className="relative z-10 flex min-h-screen flex-col items-center px-6  pb-10"
             style={{ opacity: isLoaded ? 1 : 0, transition: "opacity 0.8s ease 0.1s" }}>
-            <div className="flex flex-1 flex-col items-center justify-center w-full gap-8">
+            <div className="flex flex-1 flex-col items-center w-full lg:justify-center lg:gap-8">
 
-              {/* Logo + brand */}
-              <div className="flex items-center justify-center gap-3">
+              {/* Logo + brand – desktop only */}
+              <div className="hidden lg:flex items-center justify-center gap-3">
                 <img src={logo} alt="Aileen Solutions" className="h-10 w-auto" />
                 <span className="text-sm font-semibold tracking-widest text-white/90">AILEEN SOLUTIONS</span>
               </div>
 
-              <div className="mx-auto w-full max-w-6xl flex flex-col items-center gap-8 lg:flex-row lg:items-center lg:gap-0">
+              {/* Center group: slogan + carousel (flex-1 on mobile to fill center space) */}
+              <div className="flex-1 lg:flex-none flex flex-col items-center justify-center w-full max-w-6xl mx-auto gap-6 lg:flex-row lg:items-center lg:gap-0">
 
                 {/* Slogan */}
                 <div className="flex w-full justify-center lg:w-[65%] lg:pr-10"
@@ -187,14 +166,12 @@ export default function Home() {
                     style={{ opacity: isLoaded ? 1 : 0, animation: isLoaded && !isSplit ? "sloganIn 0.6s ease forwards" : "none", transition: "none" }} />
                 </div>
 
-                {/* Divider */}
-                <div className="h-px w-4/5 bg-gradient-to-r from-transparent via-white/30 to-transparent lg:hidden"
-                  style={{ opacity: isSplit ? 1 : 0, transition: "opacity 0.3s ease 0.1s" }} />
+                {/* Divider – desktop only */}
                 <div className="hidden lg:block lg:h-64 lg:w-px lg:flex-shrink-0"
                   style={{ background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.28) 20%, rgba(255,255,255,0.28) 80%, transparent)", opacity: isSplit ? 1 : 0, transform: isSplit ? "scaleY(1)" : "scaleY(0.1)", transformOrigin: "center", transition: "opacity 0.35s ease 0.1s, transform 0.35s ease 0.1s" }} />
 
-                {/* Carousel */}
-                <div className="flex w-full flex-col items-center lg:w-[35%] lg:items-start lg:pl-10"
+                {/* Carousel – desktop only */}
+                <div className="hidden lg:flex w-full flex-col items-center lg:w-[35%] lg:items-start lg:pl-10"
                   style={{ opacity: isSplit ? 1 : 0, transform: isSplit ? "translateX(0)" : "translateX(-36px)", transition: "opacity 0.45s ease 0.1s, transform 0.45s cubic-bezier(0.2,0,0.2,1) 0.1s", pointerEvents: isSplit ? "auto" : "none" }}
                   onMouseEnter={() => setCarouselHovered(true)}
                   onMouseLeave={() => setCarouselHovered(false)}>
@@ -205,8 +182,6 @@ export default function Home() {
                       {slides[currentSlide]}
                     </div>
                   </div>
-
-                  {/* Prev / Next */}
                   <div className="mt-3 flex items-center gap-1.5 self-center lg:self-start"
                     style={{ opacity: carouselHovered ? 1 : 0, transform: carouselHovered ? "translateY(0)" : "translateY(4px)", transition: "opacity 0.3s ease, transform 0.3s ease", pointerEvents: carouselHovered ? "auto" : "none" }}>
                     <button onClick={() => triggerSlide("prev")} aria-label="Previous"
@@ -226,14 +201,32 @@ export default function Home() {
                     </button>
                   </div>
                 </div>
+
+                {/* Carousel + divider + description – mobile only */}
+                <div className="flex lg:hidden flex-col w-full gap-4"
+                  style={{ opacity: isSplit ? 1 : 0, transition: "opacity 0.45s ease 0.2s" }}>
+                  <div className="relative h-[120px] w-full overflow-hidden">
+                    <div key={currentSlide}
+                      style={{ animation: isAnimating ? `slideOut${slideDir === "up" ? "Up" : "Down"} 0.38s ease forwards` : `slideIn${slideDir === "up" ? "Up" : "Down"} 0.38s ease forwards`, position: "absolute", inset: 0 }}>
+                      {slides[currentSlide]}
+                    </div>
+                  </div>
+                  <div className="h-px w-full bg-gradient-to-r from-transparent via-white/25 to-transparent" />
+                  <p className="text-xs leading-relaxed text-white/70 text-center">
+                    We deliver reliable software solutions, trusted services, and experienced consulting from process and quality to Automation and AI — Empowering business efficiency and growth.
+                  </p>
+                </div>
+
               </div>
 
               {/* Description + Buttons */}
-              <div className="flex flex-col items-center text-center">
-                <p className="mx-auto max-w-3xl text-sm leading-relaxed text-white/85 md:text-base">
+              <div className="mt-auto lg:mt-0 flex flex-col items-center text-center w-full gap-3 lg:gap-4">
+                {/* Description – desktop only */}
+                <p className="hidden lg:block mx-auto max-w-3xl text-sm leading-relaxed text-white/85 md:text-base">
                   We deliver reliable software solutions, trusted services, and experienced consulting from process and quality to Automation and AI — Empowering business efficiency and growth.
                 </p>
-                <div className="mt-6 flex flex-wrap justify-center gap-4">
+                {/* Desktop buttons */}
+                <div className="hidden lg:flex justify-center gap-4">
                   <a href="/about" className="btn-fancy group relative inline-flex items-center gap-2 rounded-full border border-white/35 bg-white/5 px-7 py-3 text-sm font-semibold text-white backdrop-blur transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-emerald-500/15">
                     <span className="relative z-10">Get To Know Us</span>
                     <svg className="w-3.5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
@@ -243,6 +236,21 @@ export default function Home() {
                   <a href="/contact" className="btn-fancy group relative inline-flex items-center gap-2 rounded-full border border-white/35 bg-white/5 px-7 py-3 text-sm font-semibold text-white backdrop-blur transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-emerald-500/15">
                     <span className="relative z-10">Contact Us</span>
                     <svg className="w-3.5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                      <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+                    </svg>
+                  </a>
+                </div>
+                {/* Mobile buttons – stacked, full width */}
+                <div className="flex lg:hidden flex-col w-full gap-3 pb-2">
+                  <a href="/about" className="btn-fancy group relative inline-flex items-center justify-center gap-2 rounded-full border border-white/35 bg-white/5 px-4 py-3 text-sm font-semibold text-white backdrop-blur transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-emerald-500/15">
+                    <span className="relative z-10">Get To Know Us</span>
+                    <svg className="w-3.5 text-white shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                      <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+                    </svg>
+                  </a>
+                  <a href="/contact" className="btn-fancy group relative inline-flex items-center justify-center gap-2 rounded-full border border-white/35 bg-white/5 px-4 py-3 text-sm font-semibold text-white backdrop-blur transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-emerald-500/15">
+                    <span className="relative z-10">Contact Us</span>
+                    <svg className="w-3.5 text-white shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                       <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
                     </svg>
                   </a>
