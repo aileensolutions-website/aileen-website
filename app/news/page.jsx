@@ -1,4 +1,4 @@
-import ComingSoon from "@/views/Comingsoon";
+import News from "@/views/News";
 
 export const metadata = {
   title: "ข่าวสารและกิจกรรม",
@@ -15,5 +15,5 @@ export const metadata = {
 };
 
 export default function NewsPage() {
-  return <ComingSoon />;
+  return <News />;
 }
