@@ -12,6 +12,7 @@ const npc = "/img/home/customers/npc.png";
 const pttAsahi = "/img/home/customers/ptt-asahi.png";
 const pttDigital = "/img/home/customers/ptt-digital.png";
 const tex = "/img/home/customers/Tex.png";
+const NOK = "/img/home/customers/NOK.png";
 
 /* ── useInView hook ── */
 function useInView(threshold = 0.1) {
@@ -44,6 +45,7 @@ export default function CustomersMarquee() {
       { src: pttAsahi,   alt: "PTT Asahi" },
       { src: tex,        alt: "Thai Ethoxylate (TEX)" },
       { src: logoPTT3,   alt: "PTT Group" },
+      { src: NOK,   alt: "NOK" },
     ],
     []
   );

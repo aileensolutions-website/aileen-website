@@ -19,14 +19,6 @@ const MENU_TH = [
   { label: "ข่าวสารและกิจกรรม", href: "/news" },
 ];
 
-const MENU_EN = [
-  { label: "Home", href: "/" },
-  { label: "About Us", href: "/about" },
-  { label: "Services", href: "/service" },
-  { label: "Customers", href: "/customers" },
-  { label: "News & Events", href: "/news" },
-];
-
 const SERVICE_ITEMS = [
   {
     id: "pmp",
@@ -280,7 +272,7 @@ export default function Navbar() {
     });
   };
 
-  const menu = lang === "th" ? MENU_TH : MENU_EN;
+  const menu = MENU_TH;
 
   const menuText = scrolled ? "text-slate-700" : "text-slate-200";
   const menuHover = "hover:text-[#27b7a6]";
@@ -370,8 +362,6 @@ export default function Navbar() {
           </ul>
 
           <div className="hidden items-center gap-3 md:flex">
-            <ThemeToggle dark={dark} onToggle={toggleDark} scrolled={scrolled} />
-            <LangToggle lang={lang} onToggle={toggleLang} scrolled={scrolled} />
             <ContactButton href="/contact" />
           </div>
 
@@ -426,11 +416,6 @@ export default function Navbar() {
                   </a>
                 ),
               )}
-
-              <div className="flex items-center gap-5 border-t border-slate-100 pt-2">
-                <ThemeToggle dark={dark} onToggle={toggleDark} scrolled={true} />
-                <LangToggle lang={lang} onToggle={toggleLang} scrolled={true} />
-              </div>
 
               <div className="pt-1">
                 <ContactButton href="/contact" className="w-full justify-center" />

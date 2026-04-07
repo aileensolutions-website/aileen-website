@@ -4,24 +4,24 @@ import SectionContactFooter from "@/components/SectionContactFooter";
 
 const valuePillars = [
   {
-    value: "24/7",
-    title: "พร้อมทำงานต่อเนื่อง",
-    body: "Bot ทำงานได้ตลอดทั้งวันโดยไม่เหนื่อยล้า รองรับงานประจำที่ต้องเกิดขึ้นทุกช่วงเวลา",
+    value: "Continuous",
+    title: "ทำงานได้อย่างต่อเนื่องไม่มีสะดุด",
+    body: "รองรับปริมาณงานได้ตลอด ไม่ต้องรอ ไม่ต้องพัก ช่วยให้ทุกกระบวนการดำเนินไปอย่างลื่นไหล",
   },
   {
-    value: "DIY",
-    title: "สร้างและปรับ Bot ได้เอง",
-    body: "ผู้ใช้งานสามารถออกแบบ ปรับปรุง และติดตามการทำงานของ Bot ได้โดยไม่ต้องเขียนโค้ด",
+    value: "Flexible",
+    title: "ออกแบบและปรับ Bot ได้ตามต้องการ",
+    body: "สร้าง แก้ไข และพัฒนา Workflow ได้ง่าย รองรับการเปลี่ยนแปลงของธุรกิจโดยไม่ต้องเริ่มใหม่",
   },
   {
-    value: "Fast",
-    title: "ลดเวลางานซ้ำและขั้นตอนยาว",
-    body: "ช่วยย่นระยะเวลาการดำเนินงานของเจ้าหน้าที่ ทำให้งานเสร็จเร็วขึ้นอย่างเป็นระบบ",
+    value: "Efficient",
+    title: "ลดขั้นตอน เพิ่มความเร็วในการทำงาน",
+    body: "ลดเวลาจากงานที่เคยใช้หลายขั้นตอน ให้เสร็จได้อย่างรวดเร็วและเป็นระบบมากขึ้น",
   },
   {
-    value: "Stable",
-    title: "ลด Human Error",
-    body: "ทำงานตามกติกาเดิมอย่างสม่ำเสมอ เพิ่มความแม่นยำและลดความเสี่ยงจากงานที่ทำด้วยมือ",
+    value: "Reliable",
+    title: "แม่นยำ สม่ำเสมอ ตรวจสอบได้",
+    body: "ลดข้อผิดพลาดจากงาน Manual พร้อมทำงานตามเงื่อนไขที่กำหนดอย่างมีมาตรฐาน",
   },
 ];
 
@@ -105,7 +105,7 @@ const chooseGuides = [
 
 function SectionHeader({ eyebrow, title, description }) {
   return (
-    <div className="max-w-3xl">
+    <div className="max-w-3xl pt-5">
       <span className="inline-flex items-center gap-2 rounded-full border border-cyan-200/60 bg-cyan-50 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-cyan-700">
         <span className="h-2 w-2 rounded-full bg-emerald-400" />
         {eyebrow}
@@ -141,36 +141,44 @@ export default function RoboticProcessAutomationPage() {
                 <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-cyan-700">
                   Always-On Digital Worker
                 </p>
-                <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900">
-                  24/7 Bot Assistant
+                <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 md:text-4xl">
+                  <span className="block">RPA Bot Assistant</span>
+                  <span className="mt-1 block bg-[linear-gradient(90deg,#0b639b,#62e5da)] bg-clip-text text-transparent">
+                    ยกระดับงานอัตโนมัติให้ธุรกิจคุณ
+                  </span>
                 </h2>
-                <p className="mt-3 text-base leading-7 text-slate-600">
-                  ย้ายสาระสำคัญของบล็อกเดิมมาไว้ในส่วนนี้ เพื่อให้ hero เบาขึ้น
-                  แต่ยังสื่อจุดเด่นของ RPA ได้ชัดเจนและอ่านง่ายกว่าเดิม
-                </p>
               </div>
-              <a
-                href="#benefits"
-                className="inline-flex items-center rounded-full border border-cyan-200 bg-cyan-50 px-5 py-3 text-sm font-semibold text-cyan-800 transition hover:-translate-y-0.5"
-              >
-                Learn More
-              </a>
+             
             </div>
 
-            <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-              {valuePillars.map((item) => (
-                <div
-                  key={item.title}
-                  className="rounded-[24px] border border-slate-200 bg-[linear-gradient(180deg,#f8fcff_0%,#ffffff_100%)] p-6 shadow-[0_12px_32px_rgba(15,23,42,0.05)] transition hover:-translate-y-1 hover:border-cyan-200 hover:shadow-[0_20px_44px_rgba(14,165,233,0.12)]"
-                >
-                  <div className="text-3xl font-black tracking-tight text-slate-900">
-                    {item.value}
+              <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+                {valuePillars.map((item, index) => (
+                  <div
+                    key={item.title}
+                    className="group relative overflow-hidden rounded-[28px] border border-cyan-100/80 bg-[linear-gradient(180deg,#fbfeff_0%,#ffffff_52%,#f6fbff_100%)] p-6 shadow-[0_14px_36px_rgba(15,23,42,0.06)] transition duration-300 hover:-translate-y-1.5 hover:border-cyan-200 hover:shadow-[0_24px_54px_rgba(14,165,233,0.14)]"
+                  >
+                    
+                    
+
+                    <div className="relative flex items-start justify-between gap-4">
+                      <div className="inline-flex items-center gap-2 rounded-full border border-cyan-100 bg-cyan-50/85 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-cyan-800">
+                        <span className="h-2 w-2 rounded-full bg-[linear-gradient(90deg,#0b639b,#62e5da)]" />
+                        {item.value}
+                      </div>
+                      
+                    </div>
+
+                    <div className="relative mt-6 h-px w-full bg-gradient-to-r from-cyan-200 via-slate-200 to-transparent" />
+
+                    <h3 className="relative mt-5 text-xl font-extrabold leading-8 tracking-tight text-slate-900">
+                      {item.title}
+                    </h3>
+                    <p className="relative mt-3 text-sm leading-7 text-slate-600">{item.body}</p>
+
+                   <div className="absolute inset-x-0 top-0 h-1 bg-[linear-gradient(90deg,#0b639b,#62e5da)] opacity-90" />
                   </div>
-                  <h3 className="mt-4 text-lg font-bold text-slate-900">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-slate-600">{item.body}</p>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
           </div>
         </section>
 

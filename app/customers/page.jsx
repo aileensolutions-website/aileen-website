@@ -1,4 +1,4 @@
-import ComingSoon from "@/views/Comingsoon";
+import Customers from "@/views/Customers";
 
 export const metadata = {
   title: "ลูกค้าของเรา",
@@ -15,5 +15,5 @@ export const metadata = {
 };
 
 export default function CustomersPage() {
-  return <ComingSoon />;
+  return <Customers />;
 }

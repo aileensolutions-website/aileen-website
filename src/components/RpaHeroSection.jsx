@@ -1,16 +1,12 @@
 ﻿"use client";
 
 import { useEffect, useRef } from "react";
-import AnimatedBg from "./AnimatedBg";
+import AnimatedBg from "./AnimatedBgFlux";
 
 const rpaIcon = "/img/home/productsSolutions/RPA.svg";
 const heroImage = "/img/home/cube.png";
 
-const heroTags = [
-  "24/7 Digital Worker",
-  "Mouse & Keyboard Actions",
-  "Cross-System Workflow",
-];
+
 
 const previewSteps = [
   {
@@ -45,14 +41,14 @@ export default function RpaHeroSection() {
     let rafId;
 
     const tick = () => {
-      currentRef.current.x += (targetRef.current.x - currentRef.current.x) * 0.08;
-      currentRef.current.y += (targetRef.current.y - currentRef.current.y) * 0.08;
+      currentRef.current.x += (targetRef.current.x - currentRef.current.x) * 0.045;
+      currentRef.current.y += (targetRef.current.y - currentRef.current.y) * 0.045;
 
       const { x, y } = currentRef.current;
-      const rotateX = (50 - y) * 0.08;
-      const rotateY = (x - 50) * 0.11;
-      const floatX = (x - 50) * 0.18;
-      const floatY = (y - 50) * 0.18;
+      const rotateX = (50 - y) * 0.035;
+      const rotateY = (x - 50) * 0.045;
+      const floatX = (x - 50) * 0.08;
+      const floatY = (y - 50) * 0.08;
 
       element.style.setProperty("--mx", `${x}%`);
       element.style.setProperty("--my", `${y}%`);
@@ -83,7 +79,7 @@ export default function RpaHeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative isolate min-h-[84vh] overflow-hidden bg-[#041824] px-6 pb-16 pt-28 text-white md:min-h-[82vh] md:px-10 md:pb-20 md:pt-24"
+      className="relative isolate min-h-[92vh] overflow-hidden bg-[#041824] px-6 pb-10 pt-32 text-white md:min-h-[88vh] md:px-10 md:pb-20 md:pt-32 lg:pb-20 lg:pt-[190px]"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{
@@ -96,14 +92,14 @@ export default function RpaHeroSection() {
       }}
     >
       <div className="absolute inset-0 opacity-95">
-        <AnimatedBg />
+        <AnimatedBg side="left" />
       </div>
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(2,6,23,0.28)_0%,rgba(2,6,23,0.08)_28%,rgba(2,6,23,0.18)_100%)]" />
       <div
         className="pointer-events-none absolute inset-0 transition-opacity duration-300"
         style={{
           background:
-            "radial-gradient(circle at var(--mx) var(--my), rgba(56,189,248,0.18), transparent 22%), radial-gradient(circle at calc(100% - var(--mx)) calc(var(--my) * 0.8), rgba(16,185,129,0.16), transparent 28%)",
+            "radial-gradient(circle at var(--mx) var(--my), rgba(56,189,248,0.08), transparent 18%), radial-gradient(circle at calc(100% - var(--mx)) calc(var(--my) * 0.8), rgba(16,185,129,0.07), transparent 24%)",
         }}
       />
 
@@ -129,116 +125,40 @@ export default function RpaHeroSection() {
             ช่วยให้ทุกขั้นตอนแม่นยำ รวดเร็ว และทำงานได้ต่อเนื่องตลอด 24 ชั่วโมง 7 วัน
           </p>
 
-          <div className="mt-7 flex flex-wrap gap-3">
-            {heroTags.map((tag, index) => (
-              <span
-                key={tag}
-                className="rpa-hero__tag inline-flex items-center rounded-full border border-white/12 bg-white/10 px-4 py-2 text-sm font-medium text-white/88 backdrop-blur"
-                style={{ animationDelay: `${120 + index * 90}ms` }}
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
+          {/* <div className="rpa-hero__tag mt-8 max-w-3xl rounded-[26px] border border-white/10 bg-white/[0.05] p-2 backdrop-blur-xl">
+            <div className="grid gap-2 md:grid-cols-3">
+              {heroHighlights.map((item, index) => (
+                <div
+                  key={item.title}
+                  className="rounded-[20px] border border-white/8 bg-slate-950/10 px-4 py-3"
+                  style={{ animationDelay: `${120 + index * 90}ms` }}
+                >
+                  <div className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-cyan-100/52">
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-300/90" />
+                    {item.eyebrow}
+                  </div>
+                  <p className="mt-2 text-[15px] font-semibold leading-6 text-white/90">{item.title}</p>
+                </div>
+              ))}
+            </div>
+          </div> */}
 
           <div className="mt-9 flex flex-wrap gap-4">
+           
             <a
-              href="#always-on"
-              className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-900 transition hover:-translate-y-0.5"
+              href="/contact"
+              className="btn-fancy group relative inline-flex items-center gap-2 rounded-full border border-white/35 bg-white/5 px-7 py-3 text-sm font-semibold text-white backdrop-blur transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-emerald-500/15"
             >
-              Explore Key Value
-            </a>
-            <a
-              href="#benefits"
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/15"
-            >
-              View Benefits
+              <span className="relative z-10">Contact Us</span>
+              <svg className="w-3.5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+              </svg>
             </a>
           </div>
         </div>
 
         <div className="rpa-hero__visual relative mx-auto w-full max-w-[560px]">
-          {floatingLabels.map((item, index) => (
-            <div
-              key={item.label}
-              className={`absolute z-10 items-center gap-2 rounded-full border border-white/12 bg-slate-950/45 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-cyan-100/82 backdrop-blur ${item.className}`}
-              style={{
-                transform:
-                  index % 2 === 0
-                    ? "translate3d(calc(var(--fx) * -0.35px), calc(var(--fy) * -0.25px), 0)"
-                    : "translate3d(calc(var(--fx) * 0.3px), calc(var(--fy) * -0.3px), 0)",
-              }}
-            >
-              <span className="h-2 w-2 rounded-full bg-emerald-300" />
-              {item.label}
-            </div>
-          ))}
-
-          <div
-            className="relative rounded-[34px] border border-white/12 bg-white/8 p-4 shadow-[0_28px_90px_rgba(2,6,23,0.36)] backdrop-blur-xl"
-            style={{
-              transform:
-                "perspective(1400px) rotateX(calc(var(--rx) * 1deg)) rotateY(calc(var(--ry) * 1deg)) translate3d(calc(var(--fx) * 0.5px), calc(var(--fy) * -0.5px), 0)",
-              transition: "transform 120ms ease-out",
-            }}
-          >
-            <div className="relative aspect-[4/3] overflow-hidden rounded-[28px] border border-white/10 bg-[linear-gradient(145deg,rgba(13,53,72,0.95),rgba(11,84,96,0.78)_62%,rgba(18,148,126,0.62))]">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_22%,rgba(255,255,255,0.14),transparent_26%),radial-gradient(circle_at_80%_82%,rgba(34,197,94,0.12),transparent_24%)]" />
-              <div
-                className="absolute inset-0 opacity-20"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(rgba(255,255,255,0.14) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.14) 1px, transparent 1px)",
-                  backgroundSize: "34px 34px",
-                }}
-              />
-
-              <div className="absolute left-5 top-5 right-5 flex items-center justify-between gap-4 rounded-[22px] border border-white/12 bg-slate-950/24 px-4 py-4 backdrop-blur">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-cyan-200/20 bg-white/10">
-                    <img src={rpaIcon} alt="RPA" className="h-9 w-9" />
-                  </div>
-                  <div>
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-cyan-100/70">
-                      Bot Workspace
-                    </p>
-                    <h2 className="mt-1 text-xl font-bold text-white">Automation in Motion</h2>
-                  </div>
-                </div>
-                <div className="hidden rounded-full border border-emerald-300/25 bg-emerald-300/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-emerald-100 lg:block">
-                  Live Preview
-                </div>
-              </div>
-
-              <div
-                className="rpa-hero__orb absolute right-[6%] top-[18%] w-[52%] max-w-[290px]"
-                style={{
-                  transform:
-                    "translate3d(calc(var(--fx) * 0.55px), calc(var(--fy) * -0.45px), 0)",
-                }}
-              >
-                <img
-                  src={heroImage}
-                  alt="RPA automation visual"
-                  className="w-full object-contain drop-shadow-[0_22px_55px_rgba(10,20,35,0.5)]"
-                />
-              </div>
-
-              <div className="absolute bottom-5 left-5 right-5 grid gap-3 sm:grid-cols-3">
-                {previewSteps.map((item) => (
-                  <div
-                    key={item.title}
-                    className="rounded-[22px] border border-white/10 bg-slate-950/24 p-4 backdrop-blur"
-                  >
-                    <div className="text-xs font-semibold uppercase tracking-[0.18em] text-cyan-100/66">
-                      {item.title}
-                    </div>
-                    <p className="mt-3 text-sm leading-6 text-white/84">{item.body}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          
         </div>
       </div>
 

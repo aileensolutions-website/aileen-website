@@ -9,6 +9,7 @@ const ggc = "/img/home/customers/ggc.png";
 const hmc = "/img/home/customers/HMC.png";
 const logoPTT3 = "/img/home/customers/logo_PTT_3.png";
 const npc = "/img/home/customers/npc.png";
+const NOK = "/img/home/customers/NOK.png";
 const pttAsahi = "/img/home/customers/ptt-asahi.png";
 const pttDigital = "/img/home/customers/ptt-digital.png";
 const tex = "/img/home/customers/Tex.png";
@@ -115,6 +116,7 @@ export default function SectionDataOrbit() {
     { src: egat,       alt: "EGAT" },
     { src: hmc,        alt: "HMC Polymers" },
     { src: npc,        alt: "NPC" },
+    { src: NOK,        alt: "NOK" },
     { src: pttAsahi,   alt: "PTT Asahi" },
     { src: tex,        alt: "Thai Ethoxylate (TEX)" },
     { src: logoPTT3,   alt: "PTT Group" },
