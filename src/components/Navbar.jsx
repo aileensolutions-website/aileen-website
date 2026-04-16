@@ -288,7 +288,7 @@ export default function Navbar() {
             <span className={`engFonts text-medium font-medium ${textColor}`}>AILEEN</span>
           </a>
 
-          <ul className="hidden items-center gap-8 text-sm tracking-wide transition-colors md:flex">
+          <ul className="hidden items-center gap-8 text-sm font-medium tracking-wide transition-colors md:flex">
             {menu.map((item) => (
               <li
                 key={item.href}
@@ -309,7 +309,7 @@ export default function Navbar() {
                       onClick={() => setDesktopServicesOpen((prev) => !prev)}
                       onFocus={openDesktopServices}
                       className={[
-                        "inline-flex items-center gap-1.5 transition-colors",
+                        "inline-flex items-center gap-1.5 font-medium transition-colors",
                         menuHover,
                         desktopServicesOpen ? "text-[#27b7a6]" : menuText,
                       ].join(" ")}

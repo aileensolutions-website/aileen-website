@@ -1,11 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import AnimatedBg from "./AnimatedBgFlux";
 
 const qmsIcon = "/img/home/productsSolutions/QMS.svg";
-
-const heroTags = ["ISO-Ready Operations", "Audit & Compliance", "Centralized Quality Control"];
 
 const featureHighlights = [
   {
@@ -39,35 +37,41 @@ export default function QmsHeroSection() {
   const sectionRef = useRef(null);
   const targetRef = useRef({ x: 50, y: 50 });
   const currentRef = useRef({ x: 50, y: 50 });
+  const rafRef = useRef(null);
 
-  useEffect(() => {
-    const element = sectionRef.current;
-    if (!element) return undefined;
-
-    let rafId;
+  const scheduleUpdate = useCallback(() => {
+    if (rafRef.current) return;
 
     const tick = () => {
-      currentRef.current.x += (targetRef.current.x - currentRef.current.x) * 0.045;
-      currentRef.current.y += (targetRef.current.y - currentRef.current.y) * 0.045;
+      const element = sectionRef.current;
+      if (!element) { rafRef.current = null; return; }
+
+      const dx = targetRef.current.x - currentRef.current.x;
+      const dy = targetRef.current.y - currentRef.current.y;
+
+      currentRef.current.x += dx * 0.055;
+      currentRef.current.y += dy * 0.055;
 
       const { x, y } = currentRef.current;
-      const rotateX = (50 - y) * 0.035;
-      const rotateY = (x - 50) * 0.045;
-      const floatX = (x - 50) * 0.08;
-      const floatY = (y - 50) * 0.08;
+      element.style.setProperty("--mx", `${x.toFixed(1)}%`);
+      element.style.setProperty("--my", `${y.toFixed(1)}%`);
+      element.style.setProperty("--rx", ((50 - y) * 0.035).toFixed(2));
+      element.style.setProperty("--ry", ((x - 50) * 0.045).toFixed(2));
+      element.style.setProperty("--fx", ((x - 50) * 0.08).toFixed(2));
+      element.style.setProperty("--fy", ((y - 50) * 0.08).toFixed(2));
 
-      element.style.setProperty("--mx", `${x}%`);
-      element.style.setProperty("--my", `${y}%`);
-      element.style.setProperty("--rx", rotateX.toFixed(2));
-      element.style.setProperty("--ry", rotateY.toFixed(2));
-      element.style.setProperty("--fx", floatX.toFixed(2));
-      element.style.setProperty("--fy", floatY.toFixed(2));
-
-      rafId = requestAnimationFrame(tick);
+      if (Math.abs(dx) > 0.05 || Math.abs(dy) > 0.05) {
+        rafRef.current = requestAnimationFrame(tick);
+      } else {
+        rafRef.current = null;
+      }
     };
 
-    rafId = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(rafId);
+    rafRef.current = requestAnimationFrame(tick);
+  }, []);
+
+  useEffect(() => {
+    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
   }, []);
 
   const handleMouseMove = (event) => {
@@ -76,16 +80,18 @@ export default function QmsHeroSection() {
       x: ((event.clientX - bounds.left) / bounds.width) * 100,
       y: ((event.clientY - bounds.top) / bounds.height) * 100,
     };
+    scheduleUpdate();
   };
 
   const handleMouseLeave = () => {
     targetRef.current = { x: 50, y: 50 };
+    scheduleUpdate();
   };
 
   return (
     <section
       ref={sectionRef}
-      className="relative isolate min-h-[92vh] overflow-hidden bg-[#041824] px-6 pb-10 pt-32 text-white md:min-h-[88vh] md:px-10 md:pb-20 md:pt-32 lg:pb-20 lg:pt-[190px]"
+      className="relative isolate min-h-[92vh] overflow-hidden bg-[#041824] px-6 pb-10 pt-32 text-white md:min-h-[78vh] md:px-10 md:pb-20 md:pt-32 lg:pb-20 lg:pt-[190px]"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{
@@ -105,7 +111,7 @@ export default function QmsHeroSection() {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(circle at var(--mx) var(--my), rgba(56,189,248,0.08), transparent 18%), radial-gradient(circle at calc(100% - var(--mx)) calc(var(--my) * 0.8), rgba(16,185,129,0.07), transparent 24%)",
+            "radial-gradient(circle at var(--mx) var(--my), rgba(20,184,166,0.12), transparent 20%), radial-gradient(circle at calc(100% - var(--mx)) calc(var(--my) * 0.8), rgba(16,185,129,0.08), transparent 24%)",
         }}
       />
 
@@ -129,30 +135,15 @@ export default function QmsHeroSection() {
             เปลี่ยนการทำงานที่กระจัดกระจายให้เป็นระบบอัตโนมัติที่ตรวจสอบได้จริง
           </p>
 
-          <div className="mt-7 flex flex-wrap gap-3">
-            {heroTags.map((tag, index) => (
-              <span
-                key={tag}
-                className="qms-hero__tag inline-flex items-center rounded-full border border-white/12 bg-white/10 px-4 py-2 text-sm font-medium text-white/88 backdrop-blur"
-                style={{ animationDelay: `${120 + index * 90}ms` }}
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-
           <div className="mt-9 flex flex-wrap gap-4">
             <a
-              href="#benefits"
-              className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-900 transition hover:-translate-y-0.5"
+              href="/contact"
+              className="btn-fancy group relative inline-flex items-center gap-2 rounded-full border border-white/35 bg-white/5 px-7 py-3 text-sm font-semibold text-white backdrop-blur transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-emerald-500/15"
             >
-              Explore Benefits
-            </a>
-            <a
-              href="#modules"
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/15"
-            >
-              View Modules
+              <span className="relative z-10">Contact Us</span>
+              <svg className="w-3.5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+              </svg>
             </a>
           </div>
         </div>

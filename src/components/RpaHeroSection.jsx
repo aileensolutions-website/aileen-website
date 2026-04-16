@@ -1,33 +1,9 @@
 ﻿"use client";
 
+import Image from "next/image";
 import { useEffect, useRef } from "react";
+import rpaProcessImage from "@/assets/img/RPA/rpa-process.png";
 import AnimatedBg from "./AnimatedBgFlux";
-
-const rpaIcon = "/img/home/productsSolutions/RPA.svg";
-const heroImage = "/img/home/cube.png";
-
-
-
-const previewSteps = [
-  {
-    title: "Observe",
-    body: "อ่านข้อมูลจากหน้าจอหรือระบบต้นทางตามกติกาที่กำหนด",
-  },
-  {
-    title: "Execute",
-    body: "คลิก พิมพ์ และทำขั้นตอนเดิมซ้ำได้อย่างแม่นยำสม่ำเสมอ",
-  },
-  {
-    title: "Transfer",
-    body: "ย้ายข้อมูลระหว่างหลายระบบให้เสร็จเร็วขึ้นโดยไม่ต้องทำมือ",
-  },
-];
-
-const floatingLabels = [
-  { label: "Click Actions", className: "left-0 top-14 hidden md:flex" },
-  { label: "Rule-Based Flow", className: "right-4 top-8 hidden lg:flex" },
-  { label: "24/7 Runtime", className: "right-0 bottom-16 hidden md:flex" },
-];
 
 export default function RpaHeroSection() {
   const sectionRef = useRef(null);
@@ -79,7 +55,7 @@ export default function RpaHeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative isolate min-h-[92vh] overflow-hidden bg-[#041824] px-6 pb-10 pt-32 text-white md:min-h-[88vh] md:px-10 md:pb-20 md:pt-32 lg:pb-20 lg:pt-[190px]"
+      className="relative isolate min-h-[92vh] overflow-hidden bg-[#041824] px-6  pt-32 text-white md:min-h-[78vh] md:px-10 md:pb-20 md:pt-32 lg:pb-20 lg:pt-[190px]"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{
@@ -157,9 +133,7 @@ export default function RpaHeroSection() {
           </div>
         </div>
 
-        <div className="rpa-hero__visual relative mx-auto w-full max-w-[560px]">
-          
-        </div>
+        
       </div>
 
       <style>{`
