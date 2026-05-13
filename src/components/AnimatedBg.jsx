@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useRef } from "react";
 
 /* ─────────────────────────────────────────────
@@ -193,30 +195,41 @@ export default function AnimatedBg() {
           ];
 
       for (const b of bands) {
-        const drift = H * (isMobile ? 0.014 : 0.022) * Math.sin(t * b.spd + b.ph);
-        const yt = H * b.baseY + drift;
+        // multi-frequency twist — more organic motion
+        const f1 = Math.sin(t * b.spd + b.ph);
+        const f2 = Math.sin(t * b.spd * 1.73 + b.ph + 1.2) * 0.42;
+        const f3 = Math.sin(t * b.spd * 0.58 + b.ph - 0.8) * 0.20;
+        const twist = f1 + f2 + f3;
+
+        // mouse glow: band near cursor Y brightens
+        const mouseGlow = M.active
+          ? Math.exp(-Math.pow(M.sy - b.baseY, 2) * 14) * 0.04
+          : 0;
+
+        const yt = H * b.baseY;
         const yb = yt + H * b.thick;
 
         ct.beginPath();
         ct.moveTo(0, yt);
         ct.bezierCurveTo(
-          W * b.cpx1, yt + H * b.cpy1,
-          W * b.cpx2, yt + H * b.cpy2,
+          W * b.cpx1, yt + H * b.cpy1 * twist,
+          W * b.cpx2, yt + H * b.cpy2 * twist,
           W, yt
         );
         ct.lineTo(W, yb);
         ct.bezierCurveTo(
-          W * b.cpx2, yb + H * b.cpy2,
-          W * b.cpx1, yb + H * b.cpy1,
+          W * b.cpx2, yb + H * b.cpy2 * twist,
+          W * b.cpx1, yb + H * b.cpy1 * twist,
           0, yb
         );
         ct.closePath();
 
+        const fillAlpha = (isMobile ? 0.022 : 0.028) + mouseGlow;
         const g = ct.createLinearGradient(0, yt, 0, yb);
-        g.addColorStop(0, "rgba(178,224,255,0)");
-        g.addColorStop(0.4, isMobile ? "rgba(178,224,255,0.020)" : "rgba(178,224,255,0.026)");
-        g.addColorStop(0.6, isMobile ? "rgba(178,224,255,0.020)" : "rgba(178,224,255,0.026)");
-        g.addColorStop(1, "rgba(178,224,255,0)");
+        g.addColorStop(0,   "rgba(178,224,255,0)");
+        g.addColorStop(0.4, `rgba(200,235,255,${fillAlpha})`);
+        g.addColorStop(0.6, `rgba(200,235,255,${fillAlpha})`);
+        g.addColorStop(1,   "rgba(178,224,255,0)");
         ct.fillStyle = g;
         ct.fill();
 
@@ -251,17 +264,27 @@ export default function AnimatedBg() {
           ];
 
       for (const l of lines) {
-        const drift = H * (isMobile ? 0.010 : 0.018) * Math.sin(t * l.spd + l.ph);
-        const y = H * l.y + drift;
+        // multi-frequency twist
+        const f1 = Math.sin(t * l.spd + l.ph);
+        const f2 = Math.sin(t * l.spd * 1.85 + l.ph + 0.9) * 0.38;
+        const twist = f1 + f2;
+
+        const y = H * l.y;
+
+        // mouse glow: line near cursor Y brightens
+        const mouseGlow = M.active
+          ? Math.exp(-Math.pow(M.sy - l.y, 2) * 28) * 0.03
+          : 0;
+
         const a = isMobile
-          ? 0.026 + 0.010 * Math.sin(t * l.spd * 1.4 + l.ph)
-          : 0.038 + 0.018 * Math.sin(t * l.spd * 1.4 + l.ph);
+          ? 0.026 + 0.012 * Math.abs(twist) + mouseGlow
+          : 0.038 + 0.02 * Math.abs(twist) + mouseGlow;
 
         ct.beginPath();
         ct.moveTo(0, y);
         ct.bezierCurveTo(
-          W * l.cpx1, y + H * l.cpy1,
-          W * l.cpx2, y + H * l.cpy2,
+          W * l.cpx1, y + H * l.cpy1 * twist,
+          W * l.cpx2, y + H * l.cpy2 * twist,
           W, y
         );
         ct.strokeStyle = `rgba(185,230,255,${a})`;
@@ -314,7 +337,6 @@ export default function AnimatedBg() {
 
       const nPts = Math.ceil(W / 2) + 1;
       const baseY = H * (isMobile ? 0.71 : 0.67);
-      const ribbonDrift = H * (isMobile ? 0.006 : 0.009) * Math.sin(t * 0.10);
 
       ct.save();
       ct.lineCap = "round";
@@ -347,10 +369,13 @@ export default function AnimatedBg() {
           const x = pi * 2;
           const nx = x / W;
 
+          // envelope pins both endpoints (0 at edges, 1 at center)
+          const envelope = Math.sin(nx * Math.PI);
+
           const crestCenter = 0.50 + (isMobile ? 0.28 : 0.42) * Math.sin(t * 0.16 + u * 0.22);
           const troughCenter = 0.46 + (isMobile ? 0.24 : 0.38) * Math.sin(t * 0.16 + u * 0.22 - 1.15);
 
-          const crest = Math.exp(-Math.pow((nx - crestCenter) / (isMobile ? 0.24 : 0.19), 2));
+          const crest  = Math.exp(-Math.pow((nx - crestCenter)  / (isMobile ? 0.24 : 0.19), 2));
           const trough = Math.exp(-Math.pow((nx - troughCenter) / (isMobile ? 0.30 : 0.26), 2));
 
           const rightRise =
@@ -358,26 +383,19 @@ export default function AnimatedBg() {
             ((isMobile ? 0.14 : 0.22) +
               (isMobile ? 0.28 : 0.50) * (0.5 + 0.5 * Math.sin(t * 0.18 + u * 0.6)));
 
-          const macro =
-            (-trough * 0.82 + crest * 0.92 + rightRise * 0.42) * ampMain;
+          const macro = (-trough * 0.82 + crest * 0.92 + rightRise * 0.42) * ampMain;
 
           const sway =
             Math.sin(nx * Math.PI * 1.02 - t * 0.18 + phase * 0.30) *
-            H *
-            (isMobile ? 0.006 : 0.010);
+            H * (isMobile ? 0.006 : 0.010);
 
           const fine =
             Math.sin(nx * Math.PI * 1.55 - t * 0.30 + phase) * ampFine * (isMobile ? 0.46 : 0.70) +
             Math.sin(nx * Math.PI * 2.10 + t * 0.22 - phase * 0.70) * ampFine * (isMobile ? 0.22 : 0.35);
 
           const y =
-            baseY +
-            ribbonDrift +
-            ribbonOff +
-            perLineDrift +
-            macro +
-            sway +
-            fine;
+            baseY + ribbonOff +
+            envelope * (perLineDrift + macro + sway + fine);
 
           if (pi === 0) ct.moveTo(x, y);
           else ct.lineTo(x, y);
@@ -387,6 +405,32 @@ export default function AnimatedBg() {
         ct.lineWidth = lw;
         ct.stroke();
       }
+
+      ct.restore();
+    }
+
+    function drawCursorEffect(t) {
+      if (!M.active) return;
+      ct.save();
+      const cx = M.sx * W;
+      const cy = M.sy * H;
+
+      // pulsing outer glow
+      const pulse = 0.5 + 0.5 * Math.sin(t * 2.8);
+      const r = (isMobile ? 60 : 90) + 14 * pulse;
+      const glow = ct.createRadialGradient(cx, cy, r * 0.15, cx, cy, r);
+      glow.addColorStop(0,   `rgba(56,224,210,${0.10 + 0.05 * pulse})`);
+      glow.addColorStop(0.4, `rgba(28,190,175,${0.05 + 0.02 * pulse})`);
+      glow.addColorStop(1,   "rgba(0,0,0,0)");
+      ct.fillStyle = glow;
+      ct.fillRect(0, 0, W, H);
+
+      // sharp inner ring
+      ct.beginPath();
+      ct.arc(cx, cy, 10 + 3 * pulse, 0, Math.PI * 2);
+      ct.strokeStyle = `rgba(80,240,220,${0.25 + 0.15 * pulse})`;
+      ct.lineWidth = DPR * 0.7;
+      ct.stroke();
 
       ct.restore();
     }
@@ -417,6 +461,7 @@ export default function AnimatedBg() {
       drawAccents(t);
       drawParticles(t);
       drawWave(t);
+      drawCursorEffect(t);
 
       rafRef.current = requestAnimationFrame(loop);
     }

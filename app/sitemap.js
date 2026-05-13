@@ -1,5 +1,7 @@
 export const dynamic = "force-static";
 
+import { NEWS_ARTICLES } from "@/content/news";
+
 const SITE_URL = "https://www.aileensolutions.com";
 
 export default function sitemap() {
@@ -40,5 +42,11 @@ export default function sitemap() {
       changeFrequency: "weekly",
       priority: 0.6,
     },
+    ...NEWS_ARTICLES.map((article) => ({
+      url: `${SITE_URL}/news/${article.slug}`,
+      lastModified: new Date(article.publishedAt),
+      changeFrequency: "monthly",
+      priority: 0.5,
+    })),
   ];
 }

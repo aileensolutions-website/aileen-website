@@ -1,11 +1,190 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ContactButton from "./ContactButton";
+
 const logo = "/img/logo/aileen-logo.png";
+const PMT = "/img/home/productsSolutions/PMT.svg";
+const RPA = "/img/home/productsSolutions/RPA.svg";
+const AI = "/img/home/productsSolutions/AI.svg";
+const LPM = "/img/home/productsSolutions/LPM.svg";
+const QMS = "/img/home/productsSolutions/QMS.svg";
+
+const MENU_TH = [
+  { label: "หน้าแรก", href: "/" },
+  { label: "เกี่ยวกับเรา", href: "/about" },
+  { label: "บริการของเรา", href: "/service" },
+  { label: "ลูกค้าของเรา", href: "/customers" },
+  { label: "ข่าวสารและกิจกรรม", href: "/news" },
+];
+
+const SERVICE_ITEMS = [
+  {
+    id: "pmp",
+    href: "/service/process-management-platform",
+    title: "Process Management Platform",
+    icon: PMT,
+    summary: "Map and improve enterprise workflows from one central process system.",
+  },
+  {
+    id: "rpa",
+    href: "/service/robotic-process-automation",
+    title: "Robotic Process Automation",
+    icon: RPA,
+    summary: "Use digital workers to automate repetitive tasks across business systems.",
+  },
+  {
+    id: "dsai",
+    href: "/service/domain-specific-generative-ai",
+    title: "Domain-Specific Generative AI",
+    icon: AI,
+    summary: "Create AI assistants grounded in your internal knowledge and documents.",
+  },
+  {
+    id: "lcbo",
+    href: "/service/low-code-business-orchestrator",
+    title: "Low-Code Business Orchestrator",
+    icon: LPM,
+    summary: "Build internal apps and workflow orchestration faster with visual tools.",
+  },
+  {
+    id: "qmp",
+    href: "/service/quality-management-platform",
+    title: "Quality Management Platform",
+    icon: QMS,
+    summary: "Strengthen compliance, document control, and quality operations.",
+  },
+];
+
+const DESKTOP_SERVICE_SPLIT_INDEX = Math.ceil(SERVICE_ITEMS.length / 2);
+const DESKTOP_SERVICE_COLUMNS = [
+  SERVICE_ITEMS.slice(0, DESKTOP_SERVICE_SPLIT_INDEX),
+  SERVICE_ITEMS.slice(DESKTOP_SERVICE_SPLIT_INDEX),
+];
+
+function ThemeToggle({ dark, onToggle, scrolled }) {
+  let trackBg;
+  if (dark) trackBg = "bg-slate-600";
+  else if (scrolled) trackBg = "bg-slate-300";
+  else trackBg = "bg-white/30";
+
+  return (
+    <button
+      onClick={onToggle}
+      aria-label="Toggle dark mode"
+      className={`relative h-7 w-[52px] shrink-0 rounded-full transition-colors duration-300 focus:outline-none ${trackBg}`}
+    >
+      <span
+        className={`absolute left-[3px] top-[3px] h-[22px] w-[22px] rounded-full bg-white shadow-md transition-transform duration-300 ${
+          dark ? "translate-x-[24px]" : "translate-x-0"
+        }`}
+      />
+      <span
+        className={`absolute top-1/2 -translate-y-1/2 text-xs leading-none transition-all duration-300 ${
+          dark ? "left-[9px]" : "right-[9px]"
+        }`}
+      >
+        {dark ? "☀️" : "🌙"}
+      </span>
+    </button>
+  );
+}
+
+function LangToggle({ lang, onToggle, scrolled }) {
+  const trackBgInactive = scrolled ? "bg-slate-300" : "bg-white/30";
+  const trackBg = lang === "en" ? "bg-[#27b7a6]" : trackBgInactive;
+  const labelColorInactive = scrolled ? "text-slate-500" : "text-white/80";
+  const labelColor = lang === "en" ? "text-white/80" : labelColorInactive;
+
+  return (
+    <button
+      onClick={onToggle}
+      aria-label="Toggle language"
+      className={`relative h-7 w-[52px] shrink-0 rounded-full transition-colors duration-300 focus:outline-none ${trackBg}`}
+    >
+      <span
+        className={`absolute left-[3px] top-[3px] h-[22px] w-[22px] rounded-full bg-white shadow-md transition-transform duration-300 ${
+          lang === "en" ? "translate-x-[24px]" : "translate-x-0"
+        }`}
+      />
+      <span
+        className={`absolute top-1/2 -translate-y-1/2 text-[10px] font-bold leading-none transition-all duration-300 ${labelColor} ${
+          lang === "en" ? "left-[9px]" : "right-[9px]"
+        }`}
+      >
+        {lang === "th" ? "EN" : "TH"}
+      </span>
+    </button>
+  );
+}
+
+function Chevron({ open, className = "" }) {
+  return (
+    <svg
+      viewBox="0 0 20 20"
+      fill="none"
+      aria-hidden="true"
+      className={`h-4 w-4 transition-transform duration-300 ${open ? "rotate-180" : ""} ${className}`}
+    >
+      <path
+        d="M5 7.5L10 12.5L15 7.5"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function ServiceMenuItem({ item, onClick, mobile = false, open = true, delayMs = 0 }) {
+  return (
+    <a
+      href={item.href}
+      onClick={onClick}
+      className={[
+        "group relative flex items-start gap-3 rounded-2xl border border-transparent transition-all duration-300",
+        mobile
+          ? "px-3 py-3 hover:border-slate-200 hover:bg-slate-100"
+          : "w-full px-3 py-3 hover:-translate-y-0.5 hover:border-sky-100 hover:bg-[linear-gradient(135deg,rgba(255,255,255,1),rgba(240,249,255,0.95))] hover:shadow-[0_10px_24px_rgba(14,165,233,0.08)]",
+        open ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0",
+      ].join(" ")}
+      style={{ transitionDelay: `${delayMs}ms` }}
+    >
+      <span className="absolute inset-y-3 left-0 w-[3px] rounded-full bg-gradient-to-b from-sky-400 to-teal-400 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white shadow-sm transition-all duration-300 group-hover:scale-[1.05] group-hover:border-sky-200 group-hover:shadow-[0_8px_20px_rgba(56,189,248,0.18)]">
+        <img src={item.icon} alt="" className="h-6 w-6" />
+      </div>
+      <div className="min-w-0">
+        <h3 className="text-sm font-semibold leading-snug text-slate-900 transition-colors duration-300 group-hover:text-sky-700">
+          {item.title}
+        </h3>
+        <p className="mt-1 text-sm leading-5 text-slate-500 transition-colors duration-300 group-hover:text-slate-600">
+          {item.summary}
+        </p>
+      </div>
+    </a>
+  );
+}
 
 export default function Navbar() {
+  const navRef = useRef(null);
+  const closeTimerRef = useRef(null);
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [dark, setDark] = useState(false);
+  const [lang, setLang] = useState("th");
+  const [desktopServicesOpen, setDesktopServicesOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("theme");
+    if (saved === "dark") {
+      setDark(true);
+      document.documentElement.classList.add("dark");
+    }
+    const savedLang = localStorage.getItem("lang");
+    if (savedLang) setLang(savedLang);
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -14,68 +193,169 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const menuText = scrolled ? "text-slate-700" : "text-slate-200";
-  const menuHover = scrolled ? "hover:text-[#27b7a6]" : "hover:text-[#27b7a6]";
+  useEffect(() => {
+    const onPointerDown = (event) => {
+      if (!navRef.current?.contains(event.target)) {
+        setDesktopServicesOpen(false);
+      }
+    };
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setDesktopServicesOpen(false);
+        setMobileServicesOpen(false);
+      }
+    };
 
+    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!open) setMobileServicesOpen(false);
+  }, [open]);
+
+  useEffect(() => {
+    return () => {
+      if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    };
+  }, []);
+
+  const clearCloseTimer = () => {
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+  };
+
+  const openDesktopServices = () => {
+    clearCloseTimer();
+    setDesktopServicesOpen(true);
+  };
+
+  const closeDesktopServicesSoon = () => {
+    clearCloseTimer();
+    closeTimerRef.current = setTimeout(() => {
+      setDesktopServicesOpen(false);
+    }, 180);
+  };
+
+  const toggleDark = () => {
+    setDark((prev) => {
+      const next = !prev;
+      document.documentElement.classList.toggle("dark", next);
+      localStorage.setItem("theme", next ? "dark" : "light");
+      return next;
+    });
+  };
+
+  const toggleLang = () => {
+    setLang((prev) => {
+      const next = prev === "th" ? "en" : "th";
+      localStorage.setItem("lang", next);
+      return next;
+    });
+  };
+
+  const menu = MENU_TH;
+
+  const menuText = scrolled ? "text-slate-700" : "text-slate-200";
+  const menuHover = "hover:text-[#27b7a6]";
   const textColor = scrolled ? "text-slate-900" : "text-white";
-  const navBg = scrolled
-    ? "bg-white/95 backdrop-blur shadow-sm"
-    : "bg-transparent";
+  const navBg = scrolled ? "bg-white/95 backdrop-blur shadow-sm" : "bg-transparent";
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
+    <header ref={navRef} className="fixed inset-x-0 top-0 z-50">
       <nav className={`${navBg} transition-all duration-300`}>
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 md:px-8">
-          {/* Logo */}
           <a href="/" className="flex items-center gap-2">
-            <img
-              src={scrolled ? logo : logo}
-              alt="AILEEN logo"
-              className="h-11 w-auto"
-            />
-            <span className={`engFonts text-medium font-medium ${textColor}`}>
-              AILEEN
-            </span>
+            <img src={logo} alt="AILEEN logo" className="h-11 w-auto" />
+            <span className={`engFonts text-medium font-medium ${textColor}`}>AILEEN</span>
           </a>
 
-          {/* Desktop menu */}
-          <ul className="hidden items-center gap-8 md:flex text-sm  tracking-wide transition-colors">
-  <li>
-    <a className={` ${menuText} ${menuHover}`} href="/">
-      หน้าแรก
-    </a>
-  </li>
-  <li>
-    <a className={`${menuText} ${menuHover}`} href="/about">
-      เกี่ยวกับเรา
-    </a>
-  </li>
-  <li>
-    <a className={` ${menuText} ${menuHover}`} href="/service">
-      บริการของเรา
-    </a>
-  </li>
-  <li>
-    <a className={` ${menuText} ${menuHover}`} href="/customers">
-    ลูกค้าของเรา
-    </a>
-  </li>
-  <li>
-    <a className={` ${menuText} ${menuHover}`} href="/news">
-        ข่าวสารและกิจกรรม
-    </a>
-  </li>
-</ul>
+          <ul className="hidden items-center gap-8 text-sm font-medium tracking-wide transition-colors md:flex">
+            {menu.map((item) => (
+              <li
+                key={item.href}
+                className="relative"
+                onMouseEnter={() => {
+                  if (item.href === "/service") openDesktopServices();
+                }}
+                onMouseLeave={() => {
+                  if (item.href === "/service") closeDesktopServicesSoon();
+                }}
+              >
+                {item.href === "/service" ? (
+                  <>
+                    <button
+                      type="button"
+                      aria-expanded={desktopServicesOpen}
+                      aria-haspopup="true"
+                      onClick={() => setDesktopServicesOpen((prev) => !prev)}
+                      onFocus={openDesktopServices}
+                      className={[
+                        "inline-flex items-center gap-1.5 font-medium transition-colors",
+                        menuHover,
+                        desktopServicesOpen ? "text-[#27b7a6]" : menuText,
+                      ].join(" ")}
+                    >
+                      <span>{item.label}</span>
+                      <Chevron open={desktopServicesOpen} />
+                    </button>
 
+                    <div
+                      className={[
+                        "absolute left-1/2 top-full z-40 -translate-x-1/2 pt-3 transition-all duration-300",
+                        desktopServicesOpen
+                          ? "visible translate-y-0 opacity-100"
+                          : "invisible -translate-y-1 opacity-0 pointer-events-none",
+                      ].join(" ")}
+                      style={{ width: "min(92vw, 680px)" }}
+                      onMouseEnter={openDesktopServices}
+                      onMouseLeave={closeDesktopServicesSoon}
+                    >
+                      <div className="overflow-hidden rounded-[24px] border border-slate-200 bg-white p-4 shadow-[0_24px_70px_rgba(15,23,42,0.18)]">
+                        <div className="mb-3 px-2">
+                          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400">Services</p>
+                        </div>
+                        <div className="grid grid-cols-2 gap-3">
+                          {DESKTOP_SERVICE_COLUMNS.map((column, columnIndex) => (
+                            <div
+                              key={`col-${columnIndex}`}
+                              className="flex flex-col gap-1 rounded-2xl bg-slate-50/70 p-2"
+                            >
+                              {column.map((service, itemIndex) => (
+                                <ServiceMenuItem
+                                  key={service.id}
+                                  item={service}
+                                  open={desktopServicesOpen}
+                                  delayMs={80 + (columnIndex * 4 + itemIndex) * 35}
+                                />
+                              ))}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <a className={`${menuText} ${menuHover} transition-colors`} href={item.href}>
+                    {item.label}
+                  </a>
+                )}
+              </li>
+            ))}
+          </ul>
 
-          {/* Right */}
-          <div className="hidden md:block">
+          <div className="hidden items-center gap-3 md:flex">
             <ContactButton href="/contact" />
           </div>
 
-          {/* Mobile button */}
           <button
-            className={`md:hidden inline-flex h-10 w-10 items-center justify-center rounded-lg border ${
+            className={`inline-flex h-10 w-10 items-center justify-center rounded-lg border md:hidden ${
               scrolled ? "border-slate-200" : "border-white/30"
             }`}
             onClick={() => setOpen((v) => !v)}
@@ -86,40 +366,48 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Mobile menu */}
         {open && (
-          <div className="md:hidden border-t border-slate-200 bg-white">
-            <div className="mx-auto max-w-7xl px-4 py-4 space-y-3">
-              <a className="block font-semibold text-slate-900" href="/">
-                HOME
-              </a>
-              <a className="block font-semibold text-slate-900" href="/about">
-                ABOUT US
-              </a>
-              <a
-                className="block font-semibold text-slate-900"
-                href="/service"
-              >
-                SERVICES
-              </a>
-              <a
-                className="block font-semibold text-slate-900"
-                href="/customers"
-              >
-                CUSTOMERS
-              </a>
-              <a
-                className="block font-semibold text-slate-900"
-                href="/news"
-              >
-                NEWS
-              </a>
+          <div className="border-t border-slate-200 bg-white md:hidden">
+            <div className="mx-auto max-w-7xl space-y-3 px-4 py-4">
+              {menu.map((item) =>
+                item.href === "/service" ? (
+                  <div key={item.href} className="overflow-hidden rounded-[24px] border border-slate-200 bg-slate-50/90">
+                    <button
+                      type="button"
+                      onClick={() => setMobileServicesOpen((prev) => !prev)}
+                      className="flex w-full items-center justify-between px-4 py-4 text-left font-semibold text-slate-900"
+                    >
+                      <span>{item.label}</span>
+                      <Chevron open={mobileServicesOpen} className="text-slate-500" />
+                    </button>
 
-              <div className="pt-2">
-                <ContactButton
-                  href="/contact"
-                  className="w-full justify-center"
-                />
+                    {mobileServicesOpen && (
+                      <div className="space-y-1 border-t border-slate-200 px-3 py-3">
+                        {SERVICE_ITEMS.map((service) => (
+                          <ServiceMenuItem
+                            key={service.id}
+                            item={service}
+                            mobile
+                            onClick={() => setOpen(false)}
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <a
+                    key={item.href}
+                    className="block font-semibold text-slate-900"
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                  >
+                    {item.label}
+                  </a>
+                ),
+              )}
+
+              <div className="pt-1">
+                <ContactButton href="/contact" className="w-full justify-center" />
               </div>
             </div>
           </div>

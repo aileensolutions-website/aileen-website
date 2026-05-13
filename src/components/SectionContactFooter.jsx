@@ -312,8 +312,6 @@ export default function SectionContactDark() {
               <a href="/service" className="ct5-link">Process Management Platform</a>
               <a href="/service" className="ct5-link">Robotic Process Automation</a>
               <a href="/service" className="ct5-link">Domain-Specific Generative AI</a>
-              <a href="/service" className="ct5-link">Supply Chain Resilience</a>
-              <a href="/service" className="ct5-link">ERP Workspace</a>
             </div>
 
             {/* Col 3: Contact */}

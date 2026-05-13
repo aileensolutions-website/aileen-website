@@ -62,48 +62,8 @@ export default function SectionLeaderVision() {
 
       {/* ── Leader rows ── */}
       <div className="lv8-leaders">
-        {/* Row 1: Photo LEFT, Content RIGHT */}
-        <div className="lv8-row" style={anim("lv8Sc", 220)}>
-          <div className="lv8-photo-panel">
-            <div className="lv8-photo-inner">
-              <img src={executivePhoto1} alt="Pramote T." />
-              <div className="lv8-photo-overlay" />
-              <div className="lv8-nameplate">
-                <div className="lv8-person-name">Pramote.T</div>
-                <div className="lv8-person-role">
-                  Professional Services Director
-                </div>
-                <div className="lv8-person-co">Aileen Solutions Co., Ltd.</div>
-              </div>
-            </div>
-          </div>
 
-          <div className="lv8-content-panel" style={anim("lv8R", 360)}>
-            <div className="lv8-accent-bar" />
-            <div className="lv8-role-label">Professional Services Director</div>
-            <span className="lv8-openquote">&ldquo;</span>
-            <p className="lv8-quote">
-              เรามุ่งมั่นเป็น<mark>พันธมิตรระยะยาว</mark>
-              <br />
-              ไม่ใช่เพียงผู้ขายโซลูชั่น
-            </p>
-            <p className="lv8-body">
-              "ด้วยบริการตั้งแต่ให้คำปรึกษา ออกแบบ พัฒนา อบรม และดูแลต่อเนื่อง
-              เพื่อเน้นให้เทคโนโลยีถูกนำไปใช้งานได้จริงและสร้างผลลัพธ์ที่วัดผลได้ไม่ใช่แค่เพียงทฤษฎี
-              เพราะเราเชื่อว่า <strong>Sustainable Growth</strong>{" "}
-              เกิดขึ้นได้จากกระบวนการทำงานที่แข็งแกร่ง และเทคโนโลยีที่ออกแบบให้เหมาะกับบริบทของแต่ละองค์กร"
-            </p>
-            <div className="lv8-tags">
-              <span className="lv8-tag lv8-tag-b">Consult</span>
-              <span className="lv8-tag lv8-tag-b">Design &amp; Develop</span>
-              <span className="lv8-tag lv8-tag-g">Train &amp; Support</span>
-              <span className="lv8-tag lv8-tag-s">Long-term Partnership</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Row 2: Content LEFT, Photo RIGHT */}
-        <div className="lv8-row lv8-row-reverse" style={anim("lv8Sc", 300)}>
+      <div className="lv8-row lv8-row-reverse" style={anim("lv8Sc", 300)}>
           <div className="lv8-content-panel" style={anim("lv8L", 440)}>
             <div className="lv8-accent-bar" />
             <div className="lv8-role-label">Managing Director</div>
@@ -141,6 +101,49 @@ export default function SectionLeaderVision() {
             </div>
           </div>
         </div>
+
+        {/* Row 1: Photo LEFT, Content RIGHT */}
+        <div className="lv8-row" style={anim("lv8Sc", 220)}>
+          <div className="lv8-photo-panel">
+            <div className="lv8-photo-inner">
+              <img src={executivePhoto1} alt="Pramote T." />
+              <div className="lv8-photo-overlay" />
+              <div className="lv8-nameplate">
+                <div className="lv8-person-name">Pramote.T</div>
+                <div className="lv8-person-role">
+                  Professional Services Director & Co-Founder
+                </div>
+                <div className="lv8-person-co">Aileen Solutions Co., Ltd.</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="lv8-content-panel" style={anim("lv8R", 360)}>
+            <div className="lv8-accent-bar" />
+            <div className="lv8-role-label">Professional Services Director & Co-Founder</div>
+            <span className="lv8-openquote">&ldquo;</span>
+            <p className="lv8-quote">
+              เรามุ่งมั่นเป็น<mark>พันธมิตรระยะยาว</mark>
+              <br />
+              ไม่ใช่เพียงผู้ขายโซลูชั่น
+            </p>
+            <p className="lv8-body">
+              "ด้วยบริการตั้งแต่ให้คำปรึกษา ออกแบบ พัฒนา อบรม และดูแลต่อเนื่อง
+              เพื่อเน้นให้เทคโนโลยีถูกนำไปใช้งานได้จริงและสร้างผลลัพธ์ที่วัดผลได้ไม่ใช่แค่เพียงทฤษฎี
+              เพราะเราเชื่อว่า <strong>Sustainable Growth</strong>{" "}
+              เกิดขึ้นได้จากกระบวนการทำงานที่แข็งแกร่ง และเทคโนโลยีที่ออกแบบให้เหมาะกับบริบทของแต่ละองค์กร"
+            </p>
+            <div className="lv8-tags">
+              <span className="lv8-tag lv8-tag-b">Consult</span>
+              <span className="lv8-tag lv8-tag-b">Design &amp; Develop</span>
+              <span className="lv8-tag lv8-tag-g">Train &amp; Support</span>
+              <span className="lv8-tag lv8-tag-s">Long-term Partnership</span>
+            </div>
+          </div>
+        </div>
+
+        
+        
       </div>
     </section>
   );

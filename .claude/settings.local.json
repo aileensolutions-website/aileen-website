@@ -5,7 +5,9 @@
       "Bash(npx next:*)",
       "Bash(xargs sed:*)",
       "Bash(node -e \":*)",
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "Bash(Remove-Item -Recurse -Force \"d:\\\\AIleen Website\\\\aileen-website\\\\.next\" -ErrorAction SilentlyContinue)",
+      "Bash(Write-Host \"Cache cleared\")"
     ]
   }
 }

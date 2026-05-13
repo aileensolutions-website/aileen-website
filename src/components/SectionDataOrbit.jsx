@@ -1,17 +1,6 @@
 "use client";
 import { useEffect, useMemo, useRef, useState } from "react";
-
-const agc = "/img/home/customers/AGC.png";
-const bangchak = "/img/home/customers/bangchak.svg";
-const egat = "/img/home/customers/egat.png";
-const gc = "/img/home/customers/GC.webp";
-const ggc = "/img/home/customers/ggc.png";
-const hmc = "/img/home/customers/HMC.png";
-const logoPTT3 = "/img/home/customers/logo_PTT_3.png";
-const npc = "/img/home/customers/npc.png";
-const pttAsahi = "/img/home/customers/ptt-asahi.png";
-const pttDigital = "/img/home/customers/ptt-digital.png";
-const tex = "/img/home/customers/Tex.png";
+import { CUSTOMER_LOGOS } from "../content/customerLogos";
 
 
 /* ── OrbitChip ── */
@@ -106,19 +95,7 @@ export default function SectionDataOrbit() {
   }, []);
 
   /* marquee */
-  const logos = useMemo(() => [
-    { src: pttDigital, alt: "PTT Digital" },
-    { src: gc,         alt: "GC" },
-    { src: agc,        alt: "AGC" },
-    { src: ggc,        alt: "GGC" },
-    { src: bangchak,   alt: "Bangchak" },
-    { src: egat,       alt: "EGAT" },
-    { src: hmc,        alt: "HMC Polymers" },
-    { src: npc,        alt: "NPC" },
-    { src: pttAsahi,   alt: "PTT Asahi" },
-    { src: tex,        alt: "Thai Ethoxylate (TEX)" },
-    { src: logoPTT3,   alt: "PTT Group" },
-  ], []);
+  const logos = useMemo(() => CUSTOMER_LOGOS, []);
 
   const trackRef    = useRef(null);
   const rafMarquee  = useRef(null);
@@ -267,11 +244,29 @@ export default function SectionDataOrbit() {
               <span className="h-2 w-2 rounded-full bg-cyan-600" />
               WHAT WE DO ?
             </span>
-            <h3 className={`text-3xl font-extrabold tracking-tight text-slate-900 md:text-3xl mt-5 orb-sr ${inView ? "on" : ""}`} style={{ animationDelay: "500ms" }}>
-              Integrated digital solutions to{" "}
-              <span className="bg-gradient-to-r from-blue-600 to-emerald-500 bg-clip-text text-transparent">enhance operational efficiency</span>
-            </h3>
-            <p className={`mt-4 max-w-xl text-sm leading-relaxed text-slate-600 md:text-base orb-sr ${inView ? "on" : ""}`} style={{ animationDelay: "700ms" }}>
+            <div
+              className={`mt-5 grid gap-3 md:grid-cols-[78px_minmax(0,1fr)] md:items-center md:gap-4 lg:grid-cols-[86px_minmax(0,1fr)] orb-sr ${inView ? "on" : ""}`}
+              style={{ animationDelay: "500ms" }}
+            >
+              <div className="flex items-center justify-start md:justify-center">
+                <span
+                  className="inline-block select-none text-[58px] font-black leading-[0.8] tracking-[-0.09em] text-transparent md:text-[72px] lg:text-[80px]"
+                  style={{
+                    background: "linear-gradient(135deg, rgba(37,99,235,0.95), rgba(16,185,129,0.92))",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    textShadow: "0 14px 32px rgba(16, 185, 129, 0.16)",
+                  }}
+                >
+                  AI
+                </span>
+              </div>
+              <h3 className="relative z-10 text-[2rem] font-extrabold leading-[1.04] tracking-tight text-slate-900 md:text-[1.58rem] lg:text-[1.8rem]">
+                <span className="block md:whitespace-nowrap">Integrated digital solutions to</span>
+                <span className="block bg-gradient-to-r from-blue-600 to-emerald-500 bg-clip-text text-transparent md:whitespace-nowrap">enhance operational efficiency</span>
+              </h3>
+            </div>
+            <p className={`relative z-10 mt-4 max-w-xl text-sm leading-relaxed text-slate-600 md:text-base orb-sr ${inView ? "on" : ""}`} style={{ animationDelay: "700ms" }}>
               เราส่งมอบโซลูชั่นซอฟต์แวร์ที่เชื่อถือได้ บริการที่วางใจได้ และการให้คำปรึกษาจากทีมมากประสบการณ์ ครอบคลุมตั้งแต่การบริหารจัดการกระบวนการและคุณภาพ ไปจนถึงการทำ Automation และ Ai ที่เสริมศักยภาพ สู่การเติบโตอย่างมีประสิทธิภาพและยั่งยืนของอค์กร
             </p>
             {/* mobile list */}
