@@ -8,8 +8,6 @@ const RPA = "/img/home/productsSolutions/RPA.svg";
 const AI = "/img/home/productsSolutions/AI.svg";
 const LPM = "/img/home/productsSolutions/LPM.svg";
 const QMS = "/img/home/productsSolutions/QMS.svg";
-const SPC = "/img/home/productsSolutions/SPC.svg";
-const ERP = "/img/home/productsSolutions/ERP.svg";
 
 const MENU_TH = [
   { label: "หน้าแรก", href: "/" },
@@ -55,23 +53,13 @@ const SERVICE_ITEMS = [
     icon: QMS,
     summary: "Strengthen compliance, document control, and quality operations.",
   },
-  {
-    id: "scr",
-    href: "/service/supply-chain-resilience",
-    title: "Supply Chain Resilience",
-    icon: SPC,
-    summary: "Improve visibility and resilience across planning, monitoring, and response.",
-  },
-  {
-    id: "erp",
-    href: "/service/erp-workspace",
-    title: "ERP Workspace",
-    icon: ERP,
-    summary: "Unify ERP applications, operational data, and collaboration in one workspace.",
-  },
 ];
 
-const DESKTOP_SERVICE_COLUMNS = [SERVICE_ITEMS.slice(0, 4), SERVICE_ITEMS.slice(4)];
+const DESKTOP_SERVICE_SPLIT_INDEX = Math.ceil(SERVICE_ITEMS.length / 2);
+const DESKTOP_SERVICE_COLUMNS = [
+  SERVICE_ITEMS.slice(0, DESKTOP_SERVICE_SPLIT_INDEX),
+  SERVICE_ITEMS.slice(DESKTOP_SERVICE_SPLIT_INDEX),
+];
 
 function ThemeToggle({ dark, onToggle, scrolled }) {
   let trackBg;
@@ -320,11 +308,12 @@ export default function Navbar() {
 
                     <div
                       className={[
-                        "absolute left-1/2 top-full z-40 w-[760px] -translate-x-1/2 pt-3 transition-all duration-300",
+                        "absolute left-1/2 top-full z-40 -translate-x-1/2 pt-3 transition-all duration-300",
                         desktopServicesOpen
                           ? "visible translate-y-0 opacity-100"
                           : "invisible -translate-y-1 opacity-0 pointer-events-none",
                       ].join(" ")}
+                      style={{ width: "min(92vw, 680px)" }}
                       onMouseEnter={openDesktopServices}
                       onMouseLeave={closeDesktopServicesSoon}
                     >

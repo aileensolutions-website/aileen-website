@@ -1,18 +1,6 @@
 "use client";
 import { useEffect, useMemo, useRef, useState } from "react";
-
-const agc = "/img/home/customers/AGC.png";
-const bangchak = "/img/home/customers/bangchak.svg";
-const egat = "/img/home/customers/egat.png";
-const gc = "/img/home/customers/GC.webp";
-const ggc = "/img/home/customers/ggc.png";
-const hmc = "/img/home/customers/HMC.png";
-const logoPTT3 = "/img/home/customers/logo_PTT_3.png";
-const npc = "/img/home/customers/npc.png";
-const NOK = "/img/home/customers/NOK.png";
-const pttAsahi = "/img/home/customers/ptt-asahi.png";
-const pttDigital = "/img/home/customers/ptt-digital.png";
-const tex = "/img/home/customers/Tex.png";
+import { CUSTOMER_LOGOS } from "../content/customerLogos";
 
 
 /* ── OrbitChip ── */
@@ -107,20 +95,7 @@ export default function SectionDataOrbit() {
   }, []);
 
   /* marquee */
-  const logos = useMemo(() => [
-    { src: pttDigital, alt: "PTT Digital" },
-    { src: gc,         alt: "GC" },
-    { src: agc,        alt: "AGC" },
-    { src: ggc,        alt: "GGC" },
-    { src: bangchak,   alt: "Bangchak" },
-    { src: egat,       alt: "EGAT" },
-    { src: hmc,        alt: "HMC Polymers" },
-    { src: npc,        alt: "NPC" },
-    { src: NOK,        alt: "NOK" },
-    { src: pttAsahi,   alt: "PTT Asahi" },
-    { src: tex,        alt: "Thai Ethoxylate (TEX)" },
-    { src: logoPTT3,   alt: "PTT Group" },
-  ], []);
+  const logos = useMemo(() => CUSTOMER_LOGOS, []);
 
   const trackRef    = useRef(null);
   const rafMarquee  = useRef(null);

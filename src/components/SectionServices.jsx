@@ -64,6 +64,8 @@ const SVC = [
     detail:"ช่วยให้ผู้ใช้งานสามารถเข้าถึงข้อมูล กระบวนการทำงาน และระบบต่างๆ ได้จาก Interface เดียว ลดความซับซ้อนของการใช้งานหลายระบบ",
     features:["Dashboard สำหรับติดตามข้อมูลธุรกิจจากหลายระบบ","เชื่อมต่อข้อมูลจาก ERP และระบบอื่นๆ ขององค์กร","ระบบค้นหาข้อมูลและเอกสารจากหลายระบบ","กำหนดสิทธิ์การเข้าถึงข้อมูลตามบทบาทของผู้ใช้งาน","รองรับการใช้งานผ่าน Web และ Mobile"] },
 ];
+const DETAIL_HIDDEN_SERVICE_IDS = new Set(["scr", "erp"]);
+const DETAIL_SVC = SVC.filter(s => !DETAIL_HIDDEN_SERVICE_IDS.has(s.id));
 const AUTO_GROUP = SVC.filter(s => s.group === "auto");
 const OPS_GROUP  = SVC.filter(s => s.group === "ops");
 
@@ -90,16 +92,17 @@ function GrpHead({ label, on, delay = 0 }) {
   );
 }
 
-function GCard({ item, idx, onClick, on }) {
+function GCard({ item, idx, onClick, on, interactive = true }) {
   const ref = useRef(null);
   const onMv = useCallback((e) => {
+    if (!interactive) return;
     const el = ref.current; if (!el) return;
     const r = el.getBoundingClientRect();
     el.style.transform = `perspective(700px) rotateX(${((e.clientY-r.top)/r.height-0.5)*-5}deg) rotateY(${((e.clientX-r.left)/r.width-0.5)*5}deg) translateZ(4px)`;
-  }, []);
+  }, [interactive]);
   const onLv = useCallback(() => { if (ref.current) ref.current.style.transform = ""; }, []);
   return (
-    <div ref={ref} className={`svs-c svs-rv ${on ? "on" : ""}`} style={{ animationDelay:`${idx*80}ms` }}
+    <div ref={ref} className={`svs-c svs-rv ${on ? "on" : ""}`} style={{ animationDelay:`${idx*80}ms`, cursor: interactive ? "pointer" : "default" }}
       onClick={onClick} onMouseMove={onMv} onMouseLeave={onLv}>
       <span className="svs-n">{item.n}</span>
       <div className="svs-ic"><Ico src={item.ic} size={30} /><div className="svs-ir" /></div>
@@ -108,9 +111,11 @@ function GCard({ item, idx, onClick, on }) {
         {item.tags.map(t => <span key={t} className="svs-tg">{t}</span>)}
       </div>
       <p style={{ marginTop:11, fontSize:".9rem", lineHeight:1.7, color:"rgba(255,255,255,.65)" }}>{item.summary}</p>
-      <div style={{ marginTop:14, fontSize:".8rem", fontWeight:700, background:"linear-gradient(135deg,#38e0d0,#0ea5e9)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", display:"flex", alignItems:"center", gap:4 }}>
+      {interactive ? (
+        <div style={{ marginTop:14, fontSize:".8rem", fontWeight:700, background:"linear-gradient(135deg,#38e0d0,#0ea5e9)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", display:"flex", alignItems:"center", gap:4 }}>
         ดูรายละเอียด <span style={{ WebkitTextFillColor:"#38e0d0" }}>›</span>
-      </div>
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -190,7 +195,7 @@ export default function SectionServiceAndSolutions() {
   const [view, setView]   = useState("grid");
   const [vk,   setVk]     = useState(0);
   const go = useCallback(v => { setView(v); setVk(k => k+1); }, []);
-  const ai = SVC.find(s => s.id === view);
+  const ai = DETAIL_SVC.find(s => s.id === view);
 
   /* ── strengths state ── */
   const [stView, setStView] = useState("full");
@@ -293,7 +298,18 @@ export default function SectionServiceAndSolutions() {
             </div>
             <GrpHead label="ENTERPRISE OPERATIONS & PLATFORMS" on={svcOn} delay={350} />
             <div className="svs-grid3">
-              {OPS_GROUP.map((it, i) => <GCard key={it.id} item={it} idx={i+4} onClick={() => go(it.id)} on={svcOn} />)}
+              {OPS_GROUP.map((it, i) => (
+                <GCard
+                  key={it.id}
+                  item={it}
+                  idx={i+4}
+                  onClick={() => {
+                    if (!DETAIL_HIDDEN_SERVICE_IDS.has(it.id)) go(it.id);
+                  }}
+                  on={svcOn}
+                  interactive={!DETAIL_HIDDEN_SERVICE_IDS.has(it.id)}
+                />
+              ))}
             </div>
           </div>
 
@@ -301,10 +317,10 @@ export default function SectionServiceAndSolutions() {
           {ai && (
             <div className={`svs-stage ${view !== "grid" ? "show" : "hide"}`} key={`d-${vk}`}>
               <div className="svs-bdg-wrap" style={{ display:"flex", justifyContent:"center", marginBottom:20 }} />
-              <MobDD items={SVC} activeId={ai.id} onSelect={id => go(id)} />
+              <MobDD items={DETAIL_SVC} activeId={ai.id} onSelect={id => go(id)} />
               <div className="svs-dg" style={{ display:"grid", gridTemplateColumns:"260px 1fr", gap:24, maxWidth:960, margin:"0 auto", alignItems:"start" }}>
                 <div className="svs-dl svs-sidebar-desk" style={{ display:"flex", flexDirection:"column", gap:4 }}>
-                  {SVC.map(s => (
+                  {DETAIL_SVC.map(s => (
                     <div key={s.id} className={`svs-sli ${s.id === ai.id ? "act" : ""}`} onClick={() => go(s.id)}>
                       <div style={{ width:34, height:34, borderRadius:10, display:"flex", alignItems:"center", justifyContent:"center", background:s.id===ai.id?"rgba(56,224,208,.14)":"rgba(255,255,255,.07)", flexShrink:0, transition:"background .2s" }}>
                         <Ico src={s.ic} size={20} />
@@ -349,7 +365,7 @@ export default function SectionServiceAndSolutions() {
         {/* Stats */}
         {view === "grid" && (
           <div ref={statRef} className="svs-stats-row" style={{ display:"flex", justifyContent:"center", alignItems:"center", gap:0, marginTop:68, flexWrap:"wrap" }}>
-            {[{ v:"10+", l:"Solutions" }, { v:"10+", l:"Enterprise Clients" }, { v:"50+", l:"Enterprise Projects" }].map((st, i) => (
+            {[{ v:String(SVC.length), l:"Solutions" }, { v:"10+", l:"Enterprise Clients" }, { v:"50+", l:"Enterprise Projects" }].map((st, i) => (
               <React.Fragment key={st.l}>
                 {i > 0 && <div className="svs-stat-sep" />}
                 <div className={`svs-st ${statOn ? "on" : ""}`} style={{ textAlign:"center", padding:"0 48px", animationDelay:`${0.8+i*0.12}s` }}>
