@@ -58,7 +58,7 @@ export default function NewsArticle({ slug }) {
                   </h1>
                 )}
 
-                <p className="mt-4 max-w-3xl text-[15px] leading-7 text-slate-600 md:text-base">
+                <p className="mt-5 max-w-3xl text-[15px] leading-7 text-slate-600 md:mt-6 md:text-base">
                   {article.excerpt}
                 </p>
 
@@ -82,7 +82,7 @@ export default function NewsArticle({ slug }) {
                     </h2>
 
                     {section.agenda ? (
-                      <div className="mt-4 overflow-hidden rounded-2xl border border-slate-200">
+                      <div className="mt-5 overflow-hidden rounded-2xl border border-slate-200 md:mt-6">
                         {section.venue && (
                           <div className="flex items-center gap-2.5 border-b border-slate-200 bg-slate-50 px-5 py-3">
                             <svg className="h-4 w-4 shrink-0 text-slate-400" viewBox="0 0 20 20" fill="none">
@@ -146,7 +146,7 @@ export default function NewsArticle({ slug }) {
                       className="mt-5 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-teal-600 to-cyan-600 px-6 py-3 text-sm font-semibold text-white transition hover:opacity-95"
                     >
                       {article.website?.button ?? article.websiteUrl}
-                      <span aria-hidden>↗</span>
+                      <span aria-hidden>→</span>
                     </a>
                   </div>
                 ) : null}
@@ -216,9 +216,10 @@ export default function NewsArticle({ slug }) {
                     href={article.websiteUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-4 inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-teal-600 to-cyan-600 px-5 py-3 text-sm font-semibold text-white transition hover:opacity-95"
+                    className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-teal-600 to-cyan-600 px-5 py-3 text-sm font-semibold text-white transition hover:opacity-95"
                   >
                     {article.website?.button ?? article.websiteUrl}
+                    <span aria-hidden>→</span>
                   </a>
                 </div>
               ) : null}
