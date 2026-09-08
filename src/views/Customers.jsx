@@ -6,6 +6,7 @@ import SectionContactFooter from "../components/SectionContactFooter";
 import CustomerLogoItem from "../components/CustomerLogoItem";
 import { useLocale } from "../i18n/LocaleProvider";
 import logoPttlng from "../assets/img/home/customers/logo-pttlng.png";
+import mcLogo from "../assets/img/home/customers/mc-logo.png";
 
 function useInView(threshold = 0.14) {
   const ref = useRef(null);
@@ -44,6 +45,7 @@ const CUSTOMER_PAGE_LOGOS = [
   { src: "/img/home/customers/ptt-digital.png", alt: "PTT Digital" },
   { src: "/img/home/customers/Tex.png", alt: "Thai Ethoxylate (TEX)" },
   { src: "/img/home/customers/npc.png", alt: "NPC" },
+  { src: mcLogo.src, alt: "MC", imgClass: "!max-h-12 sm:!max-h-14" },
   { src: "/img/home/customers/NOK.png", alt: "THAI NOK" },
 ];
 
@@ -139,6 +141,7 @@ export default function Customers() {
                             key={customer.alt}
                             src={customer.src}
                             alt={customer.alt}
+                            imgClass={customer.imgClass}
                             idx={idx}
                             total={CUSTOMER_PAGE_LOGOS.length}
                             revealed={gridInView}
