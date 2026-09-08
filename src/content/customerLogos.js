@@ -1,4 +1,5 @@
 import logoPttlng from "../assets/img/home/customers/logo-pttlng.png";
+import mcLogo from "../assets/img/home/customers/mc-logo.png";
 
 export const CUSTOMER_LOGOS = [
   { src: "/img/home/customers/egat.png", alt: "EGAT" },
@@ -12,5 +13,6 @@ export const CUSTOMER_LOGOS = [
   { src: "/img/home/customers/ptt-digital.png", alt: "PTT Digital" },
   { src: "/img/home/customers/Tex.png", alt: "Thai Ethoxylate (TEX)" },
   { src: "/img/home/customers/npc.png", alt: "NPC" },
+  { src: mcLogo.src, alt: "MC", imgClass: "!max-h-12 sm:!max-h-14" },
   { src: "/img/home/customers/NOK.png", alt: "THAI NOK", imgClass: "!max-h-7 sm:!max-h-8" },
 ];

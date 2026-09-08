@@ -300,7 +300,7 @@ export default function Home() {
 
       <div className="section-surface-gradient relative">
         {isLoaded ? (
-          <div className="hero-customers-wrap relative z-20 pb-14 pt-6 sm:pb-16 sm:pt-8">
+          <div className="hero-customers-wrap relative z-20 bg-white pb-14 pt-6 sm:pb-16 sm:pt-8">
             <div className="mx-auto max-w-7xl px-6">
               <CustomerLogosHeader revealed />
             </div>
